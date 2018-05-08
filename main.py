@@ -1,14 +1,14 @@
 from Coach import Coach
-from othello.OthelloGame import OthelloGame as Game
-from othello.pytorch.NNet import NNetWrapper as nn
+from tictactoe.TicTacToeGame import TicTacToeGame as Game
+from tictactoe.keras.NNet import NNetWrapper as nn
 from utils import *
 
 args = dotdict({
-    'numIters': 1000,
+    'numIters': 1,
     'numEps': 100,
     'tempThreshold': 15,
     'updateThreshold': 0.6,
-    'maxlenOfQueue': 200000,
+    'maxlenOfQueue': 2000,
     'numMCTSSims': 25,
     'arenaCompare': 40,
     'cpuct': 1,
