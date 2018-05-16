@@ -40,6 +40,8 @@ class Coach():
         """
         trainExamples = []
         board = self.game.getInitBoard()
+        print(' in board')
+        print(board)
         self.curPlayer = 1
         episodeStep = 0
 
@@ -47,7 +49,6 @@ class Coach():
             episodeStep += 1
             canonicalBoard = self.game.getCanonicalForm(board,self.curPlayer)
             temp = int(episodeStep < self.args.tempThreshold)
-
             pi = self.mcts.getActionProb(canonicalBoard, temp=temp)
             sym = self.game.getSymmetries(canonicalBoard, pi)
             for b,p in sym:
@@ -59,7 +60,8 @@ class Coach():
             r = self.game.getGameEnded(board, self.curPlayer)
 
             if r!=0:
-                return [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
+                res = [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
+                return res
 
     def learn(self):
         """
@@ -70,6 +72,7 @@ class Coach():
         only if it wins >= updateThreshold fraction of games.
         """
 
+        #TODO: parallelize this iterations
         for i in range(1, self.args.numIters+1):
             # bookkeeping
             print('------ITER ' + str(i) + '------')
@@ -95,7 +98,6 @@ class Coach():
 
                 # save the iteration examples to the history 
                 self.trainExamplesHistory.append(iterationTrainExamples)
-                
             if len(self.trainExamplesHistory) > self.args.numItersForTrainExamplesHistory:
                 print("len(trainExamplesHistory) =", len(self.trainExamplesHistory), " => remove the oldest trainExamples")
                 self.trainExamplesHistory.pop(0)

@@ -1,27 +1,25 @@
 from Coach import Coach
-from tictactoe.TicTacToeGame import TicTacToeGame as Game
-from tictactoe.keras.NNet import NNetWrapper as nn
+from minichess.GardnerMiniChessGame import GardnerMiniChessGame as Game
+from minichess.keras.NNet import NNetWrapper as nn
 from utils import *
 
 args = dotdict({
-    'numIters': 1,
-    'numEps': 100,
+    'numIters': 10,
+    'numEps': 5,
     'tempThreshold': 15,
     'updateThreshold': 0.6,
-    'maxlenOfQueue': 2000,
+    'maxlenOfQueue': 200,
+    'arenaCompare': 10,
     'numMCTSSims': 25,
-    'arenaCompare': 40,
     'cpuct': 1,
-
     'checkpoint': './temp/',
     'load_model': False,
-    'load_folder_file': ('/dev/models/8x100x50','best.pth.tar'),
+    'load_folder_file': ('/dev/models/8x100x50', 'best.pth.tar'),
     'numItersForTrainExamplesHistory': 20,
-
 })
 
-if __name__=="__main__":
-    g = Game(6)
+if __name__ == "__main__" :
+    g = Game()
     nnet = nn(g)
 
     if args.load_model:
