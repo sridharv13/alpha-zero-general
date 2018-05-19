@@ -61,7 +61,7 @@ class GardnerMiniChessGame(Game):
             for row in range(0,self.n):
                 for col in range(0,self.n):
                     tmp_board.set(row,col,piece)
-                    for (p,start,end) in tmp_board.get_legal_moves(1):
+                    for (p,start,end) in tmp_board._get_legal_moves(1):
                         key = str(piece)+":"+str(start)+":"+str(end)
                         self.action_to_id[key] = id
                         self.id_to_action[id] = (piece,start,end)
@@ -83,7 +83,7 @@ class GardnerMiniChessGame(Game):
                             tmp_board.set(row+1,col+1,-Board.PAWN)
                         if row > 0:
                             tmp_board.set(row-1,col+1,-Board.PAWN)
-                for (p,start,end) in tmp_board.get_legal_moves(1):
+                for (p,start,end) in tmp_board._get_legal_moves(1):
                     key = str(piece)+":"+str(start)+":"+str(end)
                     if self.action_to_id.get(key) == None:
                         self.action_to_id[key] = id

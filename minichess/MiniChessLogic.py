@@ -99,7 +99,7 @@ class Board:
         moves = []
         attack_moves = []
         flat_pieces = [item for sublist in self.pieces for item in sublist]
-        for (p, start, end) in self._get_legal_moves(player,flat_pieces):
+        for (p, start, end) in self._get_legal_moves(player):
             moves.append((p,start,end))
             if flat_pieces[end] < 0: attack_moves.append((p,start,end))
 
@@ -109,7 +109,7 @@ class Board:
             moves = attack_moves
         return moves
 
-    def _get_legal_moves(self,player,flat_pieces):
+    def _get_legal_moves(self,player):
         # For each of our pieces, iterate through each possible 'ray' of moves,
         # as defined in the 'directions' map. The rays are broken e.g. by
         # captures or immediately in case of pieces such as knights.
@@ -222,7 +222,7 @@ class Board:
             Board.QUEEN: '♕',
             Board.KING: '♔',
             Board.PAWN: '♙',
-            Board.BLANK: '·'
+            Board.BLANK: '· '
         }
         result = self.pieces_without_padding()
         if player < 0: result = result[::-1]
