@@ -20,14 +20,14 @@ class GardnerMiniChessGame(Game):
         # return initial board (numpy board)
         b = Board(self.n,
             [
-                [Board.ROOK,  Board.KNIGHT,  Board.BISHOP,  Board.QUEEN, Board.KING],
-                [Board.PAWN,  Board.PAWN,    Board.PAWN,    Board.PAWN,  Board.PAWN],
+                [-Board.ROOK, -Board.KNIGHT, -Board.BISHOP, -Board.QUEEN, -Board.KING],
+                [-Board.PAWN, -Board.PAWN, -Board.PAWN, -Board.PAWN, -Board.PAWN],
                 [Board.BLANK, Board.BLANK,   Board.BLANK,   Board.BLANK, Board.BLANK],
-                [-Board.PAWN, -Board.PAWN,   -Board.PAWN,   -Board.PAWN, -Board.PAWN],
-                [-Board.ROOK, -Board.KNIGHT, -Board.BISHOP, -Board.QUEEN,-Board.KING],
+                [Board.PAWN, Board.PAWN, Board.PAWN, Board.PAWN, Board.PAWN],
+                [Board.ROOK, Board.KNIGHT, Board.BISHOP, Board.QUEEN, Board.KING],
             ]
         )
-        return np.array(b.pieces)
+        return b.pieces_without_padding()
 
     def getBoardSize(self):
         # (a,b) tuple
@@ -45,7 +45,7 @@ class GardnerMiniChessGame(Game):
         b = Board(self.n,board)
         move = (int(action/self.n), action%self.n)
         b.execute_move(move,player)
-        return (b.pieces, -player)
+        return (b.pieces_without_padding(), -player)
 
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
@@ -56,10 +56,7 @@ class GardnerMiniChessGame(Game):
             valids[-1]=1
             return np.array(valids)
         for x, y in legalMoves:
-            try:
-                valids[self.n*x+y]=1
-            except:
-                print("x: " + str(x) + " y: " + str(y))
+            valids[self.n*x+y]=1
         return np.array(valids)
 
     def getGameEnded(self, board, player):
@@ -85,11 +82,10 @@ class GardnerMiniChessGame(Game):
         assert(len(pi) == self.n**2+1)  # 1 for pass
         pi_board = np.reshape(pi[:-1], (self.n, self.n))
         l = []
-
-        for i in range(1, 5):
+        for i in range(1, 3):
             for j in [True, False]:
-                newB = np.rot90(board, i)
-                newPi = np.rot90(pi_board, i)
+                newB = np.rot90(board, i*2)
+                newPi = np.rot90(pi_board, i*2)
                 if j:
                     newB = np.fliplr(newB)
                     newPi = np.fliplr(newPi)
@@ -99,5 +95,5 @@ class GardnerMiniChessGame(Game):
     def stringRepresentation(self, board):
         return np.array_str(np.array(board))
 
-    def display(board):
-        board.display()
+    def display(self,board):
+        Board(self.n,board).display()

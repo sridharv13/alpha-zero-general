@@ -17,6 +17,7 @@ from enum import Enum
 
 class Board:
 
+    # Assigning Initial weights for all the Pieces
     PAWN = 100
     KNIGHT = 280
     BISHOP = 320
@@ -24,37 +25,59 @@ class Board:
     QUEEN = 929
     KING = 60000
     BLANK = 0
+    INF = 1000000
+
+    PLAYER1 = 1
+    PLAYER2 = -1
 
     def __init__(self, n, pieces):
         "Set up initial board configuration."
         self.n = n
-        self.last_cell = n*n - 1
-        self.bottom_left = n*n - n
-        self.bottom_right = self.last_cell
-        self.top_left = 0
-        self.top_right = n - 1
-        self.pieces = pieces
+        self.last_cell = 62
+        self.bottom_left = 43
+        self.bottom_right = 47
+        self.top_left = 15
+        self.top_right = 19
+        self.pieces = self.add_padding(pieces)
+        self.is_rotated = False
         self.player_won = 0
         self.wc = (True, True)
         self.bc = (True, True)
         self.ep = 0
         self.kp = 0
 
-        self.north, self.east, self.south, self.west = -(self.n), 0, (self.n), -1
+        # Chess GRID with Padding and Cell Number
+        # [0,  1,  2,  3,  4,  5,  6]
+        # [7,  8,  9,  10, 11, 12, 13]
+
+        # [14,   15, 16, 17, 18, 19,     20]
+        # [21,   22, 23, 24, 25, 26,     27]
+        # [28,   29, 30, 31, 32, 33,     34]
+        # [35,   36, 37, 38, 39, 40,     41]
+        # [42,   43, 44, 45, 46, 47,     48]
+
+        # [49, 50, 51, 52, 53, 54, 55]
+        # [56, 57, 58, 59, 60, 61, 62]
+
+        self.north, self.east, self.south, self.west = -(self.n+2), 1, (self.n+2), -1
         self.directions = {
-            Board.PAWN: (self.north, self.north + self.north, self.north + self.west, self.north + self.east),
-            Board.KNIGHT: (self.north + self.north + self.east, self.east + self.north + self.east,
-                  self.east + self.south + self.east, self.south + self.south + self.east,
-                  self.south + self.south + self.west, self.west + self.south + self.west,
-                  self.west + self.north + self.west, self.north + self.north + self.west),
-            Board.BISHOP: (self.north + self.east, self.south + self.east,
-                  self.south + self.west, self.north + self.west),
-            Board.ROOK: (self.north, self.east, self.south, self.west),
-            Board.QUEEN: (self.north, self.east, self.south, self.west, self.north + self.east,
-                  self.south + self.east, self.south + self.west, self.north + self.west),
-            Board.KING: (self.north, self.east, self.south, self.west, self.north + self.east,
-                  self.south + self.east, self.south + self.west, self.north + self.west)
+            Board.PAWN: (-7, -14, -8, -6),
+            Board.KNIGHT: (-9, -15, -13, -5, 15, 13, 9, 5),
+            Board.BISHOP: (8, 6, -8, -6),
+            Board.ROOK: (-7, 1, 7, -1),
+            Board.QUEEN: (8, 6, -8, -6, -7, 1, 7, -1),
+            Board.KING: (7, -7, 6, 8, -6, -8, -1, 1)
         }
+
+    def add_padding(self, board):
+        padded_board = []
+        padded_board.append([Board.INF]*(self.n+2))
+        padded_board.append([Board.INF]*(self.n+2))
+        for row in board:
+            padded_board.append([Board.INF] + row + [Board.INF])
+        padded_board.append([Board.INF]*(self.n+2))
+        padded_board.append([Board.INF]*(self.n+2))
+        return padded_board
 
     def get_legal_moves(self,player):
         # For each of our pieces, iterate through each possible 'ray' of moves,
@@ -62,14 +85,12 @@ class Board:
         # captures or immediately in case of pieces such as knights.
         flat_pieces = [item for sublist in self.pieces for item in sublist]
         for i, p in enumerate(flat_pieces):
-            if p <= 0: continue
-            print(self.directions[p])
+            if p <=0 or p == Board.INF: continue
             for d in self.directions[p]:
                 for j in count(i+d, d):
-                    if j >= self.n: break
                     q = flat_pieces[j]
                     # Stay inside the board, and off friendly pieces
-                    if q == Board.BLANK or q > 0: break
+                    if q > 0 or q == Board.INF: break
                     # Pawn move, double move and capture
                     if p == Board.PAWN and d in (self.north, self.north+self.north) and q != Board.BLANK: break
                     if p == Board.PAWN and d == self.north+self.north and (i < self.bottom_left+self.north or flat_pieces[i+self.north] != Board.BLANK): break
@@ -82,12 +103,16 @@ class Board:
                     if i == self.bottom_left and flat_pieces[j+self.east] == Board.KING and self.wc[0]: yield (j+self.east, j+self.west)
                     if i == self.bottom_right and flat_pieces[j+self.west] == Board.KING and self.wc[1]: yield (j+self.west, j+self.east)
 
-    def rotate(self):
+    def rotate(self,board):
+        self.is_rotated = not self.is_rotated
+        self.pieces = np.array(board).reshape((self.n+4,self.n+2))
+        self.pieces = self.pieces[::-1]*(-1)
         ''' Rotates the board, preserving enpassant '''
+        self.ep = self.last_cell-self.ep if self.ep else 0
+        self.kp = self.last_cell-self.kp if self.kp else 0
         return (
-            self.pieces*(-1),self.bc, self.wc,
-            self.last_cell-self.ep if self.ep else 0,
-            self.last_cell-self.kp if self.kp else 0)
+            self.pieces,self.bc, self.wc,
+            self.ep,self.kp)
 
 
     def execute_move(self, move, player):
@@ -97,7 +122,7 @@ class Board:
         p, q = flat_pieces[i], flat_pieces[j]
         put = lambda board, i, p: np.append(np.append(board[:i],[p]),board[i+1:])
         # Copy variables and reset ep and kp
-        board = self.pieces
+        board = flat_pieces
         wc, bc, ep, kp = self.wc, self.bc, 0, 0
         # Actual move
         if abs(flat_pieces[j]) == Board.KING:
@@ -114,7 +139,7 @@ class Board:
             wc = (False, False)
             if abs(j-i) == 2:
                 kp = (i+j)//2
-                board = put(board, self.bottom_left if j < i else self.bottom_right, '.')
+                board = put(board, self.bottom_left if j < i else self.bottom_right, Board.BLANK)
                 board = put(board, kp, Board.ROOK)
         # Pawn promotion, double move and en passant capture
         if p == Board.PAWN:
@@ -125,7 +150,7 @@ class Board:
             if j - i in (self.north+self.west, self.north+self.east) and q == Board.BLANK:
                 board = put(board, j+self.south, Board.BLANK)
         # We rotate the returned position, so it's ready for the next player
-        return self.rotate()
+        return self.rotate(board)
 
 
     def has_legal_moves(self,player):
@@ -144,6 +169,16 @@ class Board:
     def __getitem__(self, index):
         return self.pieces[index]
 
+    def pieces_without_padding(self):
+        result = []
+        for i, row in enumerate(self.pieces):
+            clean_row = list(filter(lambda a: abs(a) != Board.INF, row))
+            if len(clean_row) > 0:
+                if self.is_rotated:
+                    clean_row = [-x for x in clean_row]
+                result.append(clean_row)
+        return result
+
     def display(self):
         print()
         uni_pieces = {
@@ -161,6 +196,7 @@ class Board:
             Board.PAWN: '♙',
             Board.BLANK: '· '
         }
-        for i, row in enumerate(self.pieces.split()):
+        result = self.pieces_without_padding()
+        for i, row in enumerate(result):
             print(' ', self.n - i, ' '.join(uni_pieces.get(p, p) for p in row))
         print('    a  b  c  d  e  \n\n')
