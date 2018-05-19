@@ -14,6 +14,15 @@ from collections import OrderedDict, namedtuple
 import numpy as np
 from enum import Enum
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 class Board:
 
@@ -79,29 +88,35 @@ class Board:
         padded_board.append([Board.INF]*(self.n+2))
         return padded_board
 
+    def set(self,row,col,piece):
+        row = row + 2
+        col = col + 1
+        self.pieces[row][col] = piece
+
     def get_legal_moves(self,player):
         # For each of our pieces, iterate through each possible 'ray' of moves,
         # as defined in the 'directions' map. The rays are broken e.g. by
         # captures or immediately in case of pieces such as knights.
         flat_pieces = [item for sublist in self.pieces for item in sublist]
+        print(np.array(self.pieces))
         for i, p in enumerate(flat_pieces):
-            if p <=0 or p == Board.INF: continue
+            if p <= 0 or abs(p) == Board.INF: continue
             for d in self.directions[p]:
                 for j in count(i+d, d):
                     q = flat_pieces[j]
                     # Stay inside the board, and off friendly pieces
-                    if q > 0 or q == Board.INF: break
+                    if q > 0 or abs(q) == Board.INF: break
                     # Pawn move, double move and capture
                     if p == Board.PAWN and d in (self.north, self.north+self.north) and q != Board.BLANK: break
                     if p == Board.PAWN and d == self.north+self.north and (i < self.bottom_left+self.north or flat_pieces[i+self.north] != Board.BLANK): break
                     if p == Board.PAWN and d in (self.north+self.west, self.north+self.east) and q == Board.BLANK and j not in (self.ep, self.kp): break
                     # Move it
-                    yield (i, j)
+                    yield (abs(p), i, j)
                     # Stop crawlers from sliding, and sliding after captures
                     if p in [Board.PAWN,Board.KNIGHT,Board.KING] or q < 0: break
                     # Castling, by sliding the rook next to the king
-                    if i == self.bottom_left and flat_pieces[j+self.east] == Board.KING and self.wc[0]: yield (j+self.east, j+self.west)
-                    if i == self.bottom_right and flat_pieces[j+self.west] == Board.KING and self.wc[1]: yield (j+self.west, j+self.east)
+                    if i == self.bottom_left and flat_pieces[j+self.east] == Board.KING and self.wc[0]: yield (abs(p),j+self.east, j+self.west)
+                    if i == self.bottom_right and flat_pieces[j+self.west] == Board.KING and self.wc[1]: yield (abs(p),j+self.west, j+self.east)
 
     def rotate(self,board):
         self.is_rotated = not self.is_rotated
@@ -116,7 +131,7 @@ class Board:
 
 
     def execute_move(self, move, player):
-        i, j = move
+        piece, i, j = move
         i = i
         flat_pieces = [item for sublist in self.pieces for item in sublist]
         p, q = flat_pieces[i], flat_pieces[j]
@@ -159,9 +174,10 @@ class Board:
         return False
 
     def is_win(self, player):
-        if player > 0 and self.player_won == player:
+        flat_pieces = [item for sublist in self.pieces for item in sublist]
+        if player == Board.PLAYER1 and (Board.PLAYER2*Board.KING not in flat_pieces):
             return True
-        if player < 0 and self.player_won == player:
+        if player == Board.PLAYER2 and (Board.PLAYER1*Board.KING not in flat_pieces):
             return True
         return False
 
@@ -179,7 +195,7 @@ class Board:
                 result.append(clean_row)
         return result
 
-    def display(self):
+    def display(self,player):
         print()
         uni_pieces = {
             -Board.ROOK: '♜',
@@ -194,9 +210,28 @@ class Board:
             Board.QUEEN: '♕',
             Board.KING: '♔',
             Board.PAWN: '♙',
-            Board.BLANK: '· '
+            Board.BLANK: '·'
         }
         result = self.pieces_without_padding()
+        if player < 0: result = result[::-1]
+        color_output = False
+        # print(' ', self.n - i, ' '.join(uni_pieces.get(p, p) for p in row))
         for i, row in enumerate(result):
-            print(' ', self.n - i, ' '.join(uni_pieces.get(p, p) for p in row))
-        print('    a  b  c  d  e  \n\n')
+            out = ''
+            if not color_output:
+                out = ' '.join(uni_pieces.get(p*player) for p in row)
+            else:
+                out = []
+                for p in row:
+                    p = p*player
+                    if p > 0:
+                        out.append(bcolors.FAIL + uni_pieces.get(p) + bcolors.ENDC)
+                    elif p < 0:
+                        out.append(bcolors.OKGREEN + uni_pieces.get(p) + bcolors.ENDC)
+                    else:
+                        out.append(uni_pieces.get(p))
+                out = '\t'.join(out)
+            print(out)
+        for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
+        time.sleep(1)
+        # print('    a  b  c  d  e  \n\n')
