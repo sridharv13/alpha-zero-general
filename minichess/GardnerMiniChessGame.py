@@ -110,13 +110,11 @@ class GardnerMiniChessGame(Game):
         # return a fixed size binary vector
         valids = [0]*self.getActionSize()
         b = Board(self.n,board)
-        legalMoves = b.get_legal_moves(player)
         if not b.has_legal_moves(player):
             valids[-1]=1
             return np.array(valids)
-        for p, x, y in legalMoves:
+        for (p, x, y) in b.get_legal_moves(player):
             key = str(p)+":"+str(x)+":"+str(y)
-            print(key)
             valids[self.action_to_id[key]] = 1
         return np.array(valids)
 

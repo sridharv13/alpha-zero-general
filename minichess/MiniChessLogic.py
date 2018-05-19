@@ -98,7 +98,6 @@ class Board:
         # as defined in the 'directions' map. The rays are broken e.g. by
         # captures or immediately in case of pieces such as knights.
         flat_pieces = [item for sublist in self.pieces for item in sublist]
-        print(np.array(self.pieces))
         for i, p in enumerate(flat_pieces):
             if p <= 0 or abs(p) == Board.INF: continue
             for d in self.directions[p]:
@@ -115,8 +114,8 @@ class Board:
                     # Stop crawlers from sliding, and sliding after captures
                     if p in [Board.PAWN,Board.KNIGHT,Board.KING] or q < 0: break
                     # Castling, by sliding the rook next to the king
-                    if i == self.bottom_left and flat_pieces[j+self.east] == Board.KING and self.wc[0]: yield (abs(p),j+self.east, j+self.west)
-                    if i == self.bottom_right and flat_pieces[j+self.west] == Board.KING and self.wc[1]: yield (abs(p),j+self.west, j+self.east)
+                    # if i == self.bottom_left and flat_pieces[j+self.east] == Board.KING and self.wc[0]: yield (abs(p),j+self.east, j+self.west)
+                    # if i == self.bottom_right and flat_pieces[j+self.west] == Board.KING and self.wc[1]: yield (abs(p),j+self.west, j+self.east)
 
     def rotate(self,board):
         self.is_rotated = not self.is_rotated

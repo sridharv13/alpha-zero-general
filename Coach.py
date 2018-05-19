@@ -49,7 +49,7 @@ class Coach():
             temp = int(episodeStep < self.args.tempThreshold)
             pi = self.mcts.getActionProb(canonicalBoard, temp=temp)
             sym = self.game.getSymmetries(canonicalBoard, pi)
-            self.game.display(canonicalBoard,self.curPlayer)
+            # self.game.display(canonicalBoard,self.curPlayer)
             for b,p in sym:
                 trainExamples.append([b, self.curPlayer, p, None])
 
