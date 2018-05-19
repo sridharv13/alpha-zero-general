@@ -6,7 +6,7 @@ class MCTS():
     """
     This class handles the MCTS tree.
     """
-
+    MAX_TREE_DEPTH = 500
     def __init__(self, game, nnet, args):
         self.game = game
         self.nnet = nnet
@@ -42,7 +42,7 @@ class MCTS():
         return probs
 
 
-    def search(self, canonicalBoard):
+    def search(self, canonicalBoard, depth = 0):
         """
         This function performs one iteration of MCTS. It is recursively called
         till a leaf node is found. The action chosen at each node is one that
@@ -63,6 +63,10 @@ class MCTS():
         """
 
         s = self.game.stringRepresentation(canonicalBoard)
+        if depth >= MCTS.MAX_TREE_DEPTH:
+            self.Es[s] = -1e-4  # Assume draw state or loop state as failure
+            return -self.Es[s]
+
         if s not in self.Es:
             self.Es[s] = self.game.getGameEnded(canonicalBoard, 1)
         if self.Es[s]!=0:
@@ -110,7 +114,7 @@ class MCTS():
         next_s, next_player = self.game.getNextState(canonicalBoard, 1, a)
         next_s = self.game.getCanonicalForm(next_s, next_player)
 
-        v = self.search(next_s)
+        v = self.search(next_s,depth+1)
 
         if (s,a) in self.Qsa:
             self.Qsa[(s,a)] = (self.Nsa[(s,a)]*self.Qsa[(s,a)] + v)/(self.Nsa[(s,a)]+1)

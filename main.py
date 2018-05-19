@@ -10,7 +10,7 @@ args = dotdict({
     'updateThreshold': 0.6,
     'maxlenOfQueue': 200,
     'arenaCompare': 10,
-    'numMCTSSims': 5,
+    'numMCTSSims': 3,
     'cpuct': 1,
     'checkpoint': './temp/',
     'load_model': False,

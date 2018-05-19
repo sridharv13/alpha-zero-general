@@ -5,6 +5,7 @@ from Game import Game
 from .MiniChessLogic import Board
 import numpy as np
 import time
+import hashlib
 
 """
 Game class implementation for the game of TicTacToe.
@@ -14,7 +15,7 @@ Date: May 15, 2018.
 """
 
 class GardnerMiniChessGame(Game):
-    RECURSION_LIMIT = 5000
+    RECURSION_LIMIT = 1000
     def __init__(self, n=5):
         self.n = n
         self.setAllActions()
@@ -142,7 +143,7 @@ class GardnerMiniChessGame(Game):
         return [(board, pi)]
 
     def stringRepresentation(self, board):
-        return np.array_str(np.array(board))
+        return hashlib.md5(np.array_str(np.array(board)).encode('utf-8')).hexdigest()
 
     def display(self, board, player):
         Board(self.n, board).display(player)

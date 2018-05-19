@@ -60,6 +60,7 @@ class Coach():
 
             if r!=0:
                 self.game.display(canonicalBoard, self.curPlayer)
+                print('Player '+str(r)+' won')
                 res = [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
                 return res
 

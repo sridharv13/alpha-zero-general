@@ -14,6 +14,8 @@ from collections import OrderedDict, namedtuple
 import numpy as np
 from enum import Enum
 
+
+# To make the piece colors more evident in terminals
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -94,6 +96,20 @@ class Board:
         self.pieces[row][col] = piece
 
     def get_legal_moves(self,player):
+        moves = []
+        attack_moves = []
+        flat_pieces = [item for sublist in self.pieces for item in sublist]
+        for (p, start, end) in self._get_legal_moves(player,flat_pieces):
+            moves.append((p,start,end))
+            if flat_pieces[end] < 0: attack_moves.append((p,start,end))
+
+        # Reducing the recursion space of MCTS by giving priority to attack moves over passive moves
+        # If they do exist otherwise do a passive move
+        if len(attack_moves) > 0:
+            moves = attack_moves
+        return moves
+
+    def _get_legal_moves(self,player,flat_pieces):
         # For each of our pieces, iterate through each possible 'ray' of moves,
         # as defined in the 'directions' map. The rays are broken e.g. by
         # captures or immediately in case of pieces such as knights.
@@ -113,9 +129,6 @@ class Board:
                     yield (abs(p), i, j)
                     # Stop crawlers from sliding, and sliding after captures
                     if p in [Board.PAWN,Board.KNIGHT,Board.KING] or q < 0: break
-                    # Castling, by sliding the rook next to the king
-                    # if i == self.bottom_left and flat_pieces[j+self.east] == Board.KING and self.wc[0]: yield (abs(p),j+self.east, j+self.west)
-                    # if i == self.bottom_right and flat_pieces[j+self.west] == Board.KING and self.wc[1]: yield (abs(p),j+self.west, j+self.east)
 
     def rotate(self,board):
         self.is_rotated = not self.is_rotated
@@ -232,5 +245,5 @@ class Board:
                 out = '\t'.join(out)
             print(out)
         for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
-        time.sleep(1)
+        # time.sleep(1)
         # print('    a  b  c  d  e  \n\n')
