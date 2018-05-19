@@ -105,8 +105,8 @@ class Board:
 
         # Reducing the recursion space of MCTS by giving priority to attack moves over passive moves
         # If they do exist otherwise do a passive move
-        if len(attack_moves) > 0:
-            moves = attack_moves
+        # if len(attack_moves) > 0:
+            # moves = attack_moves
         return moves
 
     def _get_legal_moves(self,player):
@@ -244,6 +244,6 @@ class Board:
                         out.append(uni_pieces.get(p))
                 out = '\t'.join(out)
             print(out)
-        for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
+        # for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
         # time.sleep(1)
         # print('    a  b  c  d  e  \n\n')

@@ -1,8 +1,32 @@
-
 # Scaling Up Alpha Zero General (Minichess)
 
+An implementation of a simple game provided to check extendability of the framework. Main difference of this game comparing to Othello is that it allows draws, i.e. the cases when nobody won after the game ended. To support such outcomes ```Arena.py```, ``MCTS.py``` and ```Coach.py``` classes were modified.
 
-## Topics Covered
+To train a model for MiniChess, change the imports in ```main.py``` to:
+
+```python
+from Coach import Coach
+from minichess.MiniChessGame import Game
+from minichess.keras.NNet import NNetWrapper as nn
+from utils import *
+```
+
+ Make similar changes to ```pit.py```.
+
+To start training a model for Minichess:
+```bash
+python main.py
+```
+To start a tournament of 10 episodes with the model-based player against a random player:
+```bash
+python pit.py
+```
+You can check the results of RandomPlayer vs Neural Network Player in ```pit.py```
+
+### Experiments
+I trained a Keras model for 5X5 Minichess (10 iterations, 25 episodes, 10 epochs per iteration and 25 MCTS simulations per turn). This took about 15 minutes on an i7-7330 with CUDA Nvida GTX 960. The pretrained model (Keras) can be found in ```pretrained_models/minichess/keras/```.
+
+## Implementation Details
 
 1. Initializing and displaying the Minichess Board
 2. Checking whether game has ended or not
@@ -29,6 +53,7 @@ from minichess.keras.NNet import NNetWrapper as nn
 from utils import *
 import numpy as np
 ```
+
 
 
 - Load the Game and required Neural Network
@@ -67,7 +92,7 @@ g.display(board,player1)
     ·  ·  ·  ·  ·
     ♙ ♙ ♙ ♙ ♙
     ♖ ♘ ♗ ♕ ♔
-    [F[F[F[F[F[F
+
 
 - Check whether Game is ended
 - It should return 0 since Game is still in Valid state
@@ -125,7 +150,7 @@ g.display(board,player2)
     ·  ·  ·  ·  ·
     ♙ ♙ ♙ ♙ ♙
     ♖ ♘ ♗ ♕ ♔
-    [F[F[F[F[F[F
+
 
 - Execute first move by moving the White Pawn from a2 to a3
 
@@ -143,7 +168,7 @@ g.display(logic.pieces_without_padding(),player1)
     ♙ ·  ·  ·  ·
     ♟ ♟ ♟ ♟ ♟
     ♜ ♞ ♝ ♛ ♚
-    [F[F[F[F[F[F
+
 
 - Assign Player 2 as -1
 - Get Legal moves for Player 2
@@ -163,14 +188,14 @@ g.display(logic.pieces_without_padding(),player1)
 
     All possible moves are:
 
-    [(100, 37, 29), (280, 44, 29)]
+    [(100, 37, 30), (100, 37, 29), (100, 38, 31), (100, 39, 32), (100, 40, 33), (280, 44, 29), (280, 44, 31)]
 
     ♖ ♘ ♗ ♕ ♔
     ·  ♙ ♙ ♙ ♙
     ♙ ·  ·  ·  ·
     ♟ ♟ ♟ ♟ ♟
     ♜ ♞ ♝ ♛ ♚
-    [F[F[F[F[F[F
+
 
 ## Section 4 - Checking valid moves and mapping moves to Grid Points (to be enhanced to a3g5 format later)
 
@@ -203,7 +228,7 @@ g.display(logic.pieces_without_padding(),player1)
     ♞ ·  ·  ·  ·
     ·  ♙ ♙ ♙ ♙
     ♖ ♘ ♗ ♕ ♔
-    [F[F[F[F[F[F
+
 
 - White to take the horse
 - List legal moves and take the horse
@@ -221,14 +246,14 @@ g.display(logic.pieces_without_padding(),player1)
 
     All possible moves are:
 
-    [(100, 37, 29), (479, 43, 29), (280, 44, 29)]
+    [(100, 37, 30), (100, 37, 29), (100, 38, 31), (100, 39, 32), (100, 40, 33), (479, 43, 36), (479, 43, 29), (280, 44, 29), (280, 44, 31)]
 
     ♜ ·  ♝ ♛ ♚
     ♟ ♟ ♟ ♟ ♟
     ♞ ·  ·  ·  ·
     ·  ♙ ♙ ♙ ♙
     ♖ ♘ ♗ ♕ ♔
-    [F[F[F[F[F[F
+
 
 
 ```python
@@ -247,10 +272,10 @@ print(moves)
     ♘ ·  ·  ·  ·
     ♟ ♟ ♟ ♟ ♟
     ♜ ·  ♝ ♛ ♚
-    [F[F[F[F[F[F
+
     All possible moves are:
 
-    [(100, 37, 29)]
+    [(100, 37, 30), (100, 37, 29), (100, 38, 31), (100, 39, 32), (100, 40, 33), (479, 43, 44)]
 
 
 ## Section 5 - Play all pieces one by one and validate (Pawn, Rook, King, Queen, Knight and Bishop)
@@ -292,10 +317,10 @@ print(moves)
     ♟ ·  ·  ·  ·
     ·  ♙ ♙ ♙ ♙
     ♖ ·  ♗ ♕ ♔
-    [F[F[F[F[F[F
+
     All possible moves are:
 
-    [(100, 37, 29), (479, 43, 29)]
+    [(100, 37, 30), (100, 37, 23), (100, 37, 29), (100, 38, 31), (100, 39, 32), (100, 40, 33), (479, 43, 36), (479, 43, 29), (479, 43, 44)]
 
 
 
@@ -315,10 +340,10 @@ print(moves)
     ♖ ·  ·  ·  ·
     ♟ ·  ♟ ♟ ♟
     ♜ ·  ♝ ♛ ♚
-    [F[F[F[F[F[F
+
     All possible moves are:
 
-    [(320, 45, 29)]
+    [(100, 38, 31), (100, 39, 32), (100, 40, 33), (479, 43, 44), (320, 45, 37), (320, 45, 29)]
 
 
 
@@ -339,10 +364,10 @@ print(moves)
     ♝ ·  ·  ·  ·
     ·  ♙ ♙ ♙ ♙
     ·  ·  ♗ ♕ ♔
-    [F[F[F[F[F[F
+
     All possible moves for Player 1 are:
 
-    [(100, 37, 29)]
+    [(100, 37, 30), (100, 37, 23), (100, 37, 29), (100, 38, 31), (100, 39, 32), (100, 40, 33)]
 
 
 
@@ -363,7 +388,7 @@ print(moves)
     ♙ ·  ·  ·  ·
     ♟ ·  ♟ ♟ ♟
     ♜ ·  ·  ♛ ♚
-    [F[F[F[F[F[F
+
     All possible moves for Player 2 are:
 
     [(100, 38, 31), (100, 39, 32), (100, 40, 33), (479, 43, 44), (479, 43, 45), (929, 46, 45), (929, 46, 44)]
@@ -387,7 +412,7 @@ print(moves)
     ♙ ·  ·  ·  ·
     ·  ·  ♙ ♙ ♙
     ·  ·  ♗ ♕ ♔
-    [F[F[F[F[F[F
+
     All possible moves for Player 1 are:
 
     [(100, 38, 31), (100, 39, 32), (100, 40, 33), (320, 45, 37)]
@@ -411,10 +436,10 @@ print(moves)
     ♙ ·  ·  ♙ ·
     ♟ ·  ♟ ♟ ♟
     ♜ ♛ ·  ·  ♚
-    [F[F[F[F[F[F
+
     All possible moves for Player 2 are:
 
-    [(100, 38, 32), (100, 40, 32)]
+    [(100, 38, 31), (100, 38, 32), (100, 40, 33), (100, 40, 32), (929, 44, 37), (929, 44, 30), (929, 44, 23), (929, 44, 16), (929, 44, 45), (929, 44, 46), (60000, 47, 46)]
 
 
 
@@ -435,10 +460,10 @@ print(moves)
     ♙ ·  ·  ♙ ·
     ·  ·  ♙ ·  ♙
     ·  ·  ♗ ♕ ♔
-    [F[F[F[F[F[F
+
     All possible moves for Player 1 are:
 
-    [(100, 29, 23), (100, 32, 24), (100, 32, 26)]
+    [(100, 29, 23), (100, 32, 24), (100, 32, 26), (100, 38, 31), (100, 40, 33), (320, 45, 37), (320, 45, 39), (320, 45, 33), (929, 46, 39), (60000, 47, 39)]
 
 
 ## Section 7 -  Check Pawn to reach last move and become Queuen
@@ -462,10 +487,10 @@ print(moves)
     ♙ ·  ·  ·  ·
     ♟ ♛ ♙ ♟ ♟
     ♜ ·  ·  ·  ♚
-    [F[F[F[F[F[F
+
     All possible moves for Player 2 are:
 
-    [(929, 37, 29), (929, 37, 19), (929, 37, 38)]
+    [(929, 37, 45), (929, 37, 29), (929, 37, 31), (929, 37, 25), (929, 37, 19), (929, 37, 30), (929, 37, 23), (929, 37, 16), (929, 37, 38), (929, 37, 44), (100, 39, 32), (100, 39, 25), (100, 40, 33), (479, 43, 44), (479, 43, 45), (479, 43, 46), (60000, 47, 46)]
 
 
 
@@ -486,10 +511,10 @@ print(moves)
     ♙ ·  ·  ·  ·
     ·  ·  ♙ ♛ ♙
     ·  ·  ♗ ♕ ♔
-    [F[F[F[F[F[F
+
     All possible moves for Player 1 are:
 
-    [(320, 45, 39), (929, 46, 39), (60000, 47, 39)]
+    [(100, 24, 17), (100, 38, 31), (100, 40, 33), (320, 45, 37), (320, 45, 39), (929, 46, 39), (60000, 47, 39)]
 
 
 
@@ -510,10 +535,10 @@ print(moves)
     ♙ ·  ·  ·  ·
     ♟ ·  ·  ♟ ♟
     ♜ ·  ♕ ·  ♚
-    [F[F[F[F[F[F
+
     All possible moves for Player 2 are:
 
-    [(929, 25, 17), (929, 25, 19), (929, 25, 18), (929, 25, 26), (929, 25, 24), (479, 43, 45)]
+    [(929, 25, 33), (929, 25, 31), (929, 25, 37), (929, 25, 17), (929, 25, 19), (929, 25, 18), (929, 25, 26), (929, 25, 32), (929, 25, 24), (100, 39, 32), (100, 40, 33), (479, 43, 44), (479, 43, 45), (60000, 47, 46)]
 
 
 ## Section 8 - Complete the Game and check the winner
@@ -538,10 +563,10 @@ print(moves)
     ♙ ·  ·  ·  ·
     ·  ·  ♙ ·  ♙
     ·  ·  ♗ ♕ ♛
-    [F[F[F[F[F[F
+
     All possible moves for Player 1 are:
 
-    [(929, 17, 25), (929, 17, 19), (929, 17, 15), (929, 46, 25), (929, 46, 47)]
+    [(929, 17, 25), (929, 17, 23), (929, 17, 18), (929, 17, 19), (929, 17, 24), (929, 17, 31), (929, 17, 16), (929, 17, 15), (100, 38, 31), (100, 38, 24), (100, 40, 33), (320, 45, 37), (320, 45, 39), (320, 45, 33), (929, 46, 39), (929, 46, 32), (929, 46, 25), (929, 46, 47)]
 
 
 
@@ -681,14 +706,39 @@ c = Coach(g, nnet, args)
 
 ```python
 c.executeEpisode()
+c.executeEpisode()
+c.executeEpisode()
 print()
 ```
 
 
-    ·  ♖ ·  ·  ·
-    ·  ·  ·  ♟ ♚
-    ·  ·  ·  ♙ ·
-    ♙ ·  ♕ ·  ·
-    ·  ·  ·  ♔ ·
+    ·  ♜ ♝ ·  ♚
+    ·  ♟ ·  ·  ♟
+    ·  ♟ ♗ ♙ ♙
+    ·  ♖ ♞ ·  ·
+    ·  ♛ ♕ ·  ♔
     Player -1 won
 
+    ♜ ♞ ·  ·  ♚
+    ♟ ·  ♘ ♟ ·
+    ♝ ·  ·  ♙ ·
+    ♙ ♙ ♟ ·  ♛
+    ♖ ·  ♗ ·  ♔
+    Player -1 won
+
+    ·  ·  ·  ♛ ♚
+    ♜ ·  ·  ·  ·
+    ♝ ·  ♕ ♟ ♟
+    ♙ ·  ·  ♙ ♙
+    ♖ ♘ ♛ ·  ♔
+    Player -1 won
+
+
+
+### Contributors and Credits
+* [Karthik selvakumar Bhuvaneswaran](https://github.com/karthikselva)
+
+The implementation is based on the game of Othello (https://github.com/suragnair/alpha-zero-general/tree/master/othello).
+
+### AlphaGo / AlphaZero Events
+* February 8, 2018 - [Solving Alpha Go Zero + TensorFlow, Kubernetes-based Serverless AI Models on GPU](https://www.meetup.com/Advanced-Spark-and-TensorFlow-Meetup/events/245308722/)
