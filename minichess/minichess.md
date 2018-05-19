@@ -27,6 +27,7 @@ from minichess.GardnerMiniChessGame import GardnerMiniChessGame as Game
 from minichess.MiniChessLogic import Board
 from minichess.keras.NNet import NNetWrapper as nn
 from utils import *
+import numpy as np
 ```
 
     c:\users\karthik\appdata\local\programs\python\python36\lib\site-packages\h5py\__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
@@ -43,10 +44,14 @@ nnet = nn(g)
 board = g.getInitBoard()
 n = 5 # 5X5 Grid
 logic = Board(n,board)
-print(board)
+print(np.array(board))
 ```
 
-    [[-479, -280, -320, -929, -60000], [-100, -100, -100, -100, -100], [0, 0, 0, 0, 0], [100, 100, 100, 100, 100], [479, 280, 320, 929, 60000]]
+    [[  -479   -280   -320   -929 -60000]
+     [  -100   -100   -100   -100   -100]
+     [     0      0      0      0      0]
+     [   100    100    100    100    100]
+     [   479    280    320    929  60000]]
 
 
 ## Section 2 - Checking whether game has ended or not
@@ -61,14 +66,17 @@ g.display(board)
 ```
 
 
-      5 ♜ ♞ ♝ ♛ ♚
-      4 ♟ ♟ ♟ ♟ ♟
-      3 ·  ·  ·  ·  ·
-      2 ♙ ♙ ♙ ♙ ♙
-      1 ♖ ♘ ♗ ♕ ♔
-        a  b  c  d  e
+    ---------------------------------------------------------------------------
+
+    TypeError                                 Traceback (most recent call last)
+
+    <ipython-input-3-1c914fc1972b> in <module>()
+          1 player1 = 1
+          2 player2 = -1
+    ----> 3 g.display(board)
 
 
+    TypeError: display() missing 1 required positional argument: 'player'
 
 
 - Check whether Game is ended
@@ -78,9 +86,6 @@ g.display(board)
 ```python
 print(g.getGameEnded(board,player1))
 ```
-
-    0
-
 
 ## Section 4 - Checking valid moves and mapping moves to Grid Points (to be enhanced to a3g5 format later)
 
@@ -117,21 +122,6 @@ print(moves)
 g.display(board)
 ```
 
-
-    All possible moves are:
-
-    [(36, 29), (37, 30), (38, 31), (39, 32), (40, 33), (44, 29), (44, 31)]
-
-      5 ♜ ♞ ♝ ♛ ♚
-      4 ♟ ♟ ♟ ♟ ♟
-      3 ·  ·  ·  ·  ·
-      2 ♙ ♙ ♙ ♙ ♙
-      1 ♖ ♘ ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-
 - Execute first move by moving the White Pawn from a2 to a3
 
 move = (36,29)
@@ -141,17 +131,6 @@ move = (36,29)
 logic.execute_move((36,29),player1)
 g.display(logic.pieces_without_padding())
 ```
-
-
-      5 ♖ ♘ ♗ ♕ ♔
-      4 ·  ♙ ♙ ♙ ♙
-      3 ♙ ·  ·  ·  ·
-      2 ♟ ♟ ♟ ♟ ♟
-      1 ♜ ♞ ♝ ♛ ♚
-        a  b  c  d  e
-
-
-
 
 - Assign Player 2 as -1
 - Get Legal moves for Player 2
@@ -167,21 +146,6 @@ for move in logic.get_legal_moves(player2):
 print(moves)
 g.display(logic.pieces_without_padding())
 ```
-
-
-    All possible moves are:
-
-    [(36, 28), (37, 30), (37, 29), (38, 31), (39, 32), (40, 33), (40, 34), (43, 50), (43, 42), (44, 35), (44, 29), (44, 31), (44, 59), (44, 57), (44, 53), (44, 49), (45, 53), (45, 51), (46, 54), (46, 52), (46, 53), (47, 54), (47, 53), (47, 55), (47, 41), (47, 48)]
-
-      5 ♖ ♘ ♗ ♕ ♔
-      4 ·  ♙ ♙ ♙ ♙
-      3 ♙ ·  ·  ·  ·
-      2 ♟ ♟ ♟ ♟ ♟
-      1 ♜ ♞ ♝ ♛ ♚
-        a  b  c  d  e
-
-
-
 
 ## Section 4 - Checking valid moves and mapping moves to Grid Points (to be enhanced to a3g5 format later)
 
@@ -208,17 +172,6 @@ logic.execute_move((44,29),player2)
 g.display(logic.pieces_without_padding())
 ```
 
-
-      5 ♜ ·  ♝ ♛ ♚
-      4 ♟ ♟ ♟ ♟ ♟
-      3 ♞ ·  ·  ·  ·
-      2 ·  ♙ ♙ ♙ ♙
-      1 ♖ ♘ ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-
 - White to take the horse
 - List legal moves and take the horse
 
@@ -233,21 +186,6 @@ g.display(logic.pieces_without_padding())
 ```
 
 
-    All possible moves are:
-
-    [(37, 30), (37, 29), (38, 31), (39, 32), (40, 33), (43, 36), (43, 29), (44, 29), (44, 31)]
-
-      5 ♜ ·  ♝ ♛ ♚
-      4 ♟ ♟ ♟ ♟ ♟
-      3 ♞ ·  ·  ·  ·
-      2 ·  ♙ ♙ ♙ ♙
-      1 ♖ ♘ ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-
-
 ```python
 logic.execute_move((44,29),player1)
 g.display(logic.pieces_without_padding())
@@ -257,21 +195,6 @@ for move in logic.get_legal_moves(player2):
     moves.append(move)
 print(moves)
 ```
-
-
-      5 ♖ ·  ♗ ♕ ♔
-      4 ·  ♙ ♙ ♙ ♙
-      3 ♘ ·  ·  ·  ·
-      2 ♟ ♟ ♟ ♟ ♟
-      1 ♜ ·  ♝ ♛ ♚
-        a  b  c  d  e
-
-
-
-    All possible moves are:
-
-    [(36, 28), (37, 30), (37, 29), (38, 31), (39, 32), (40, 33), (40, 34), (43, 44), (43, 50), (43, 42), (45, 53), (45, 51), (46, 54), (46, 52), (46, 53), (47, 54), (47, 53), (47, 55), (47, 41), (47, 48)]
-
 
 ## Section 5 - Play all pieces one by one and validate (Pawn, Rook, King, Queen, Knight and Bishop)
 
@@ -307,21 +230,6 @@ print(moves)
 ```
 
 
-      5 ♜ ·  ♝ ♛ ♚
-      4 ♟ ·  ♟ ♟ ♟
-      3 ♟ ·  ·  ·  ·
-      2 ·  ♙ ♙ ♙ ♙
-      1 ♖ ·  ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-    All possible moves are:
-
-    [(37, 30), (37, 23), (37, 29), (38, 31), (39, 32), (40, 33), (43, 36), (43, 29), (43, 44)]
-
-
-
 ```python
 logic.execute_move((43,29),player1)
 g.display(logic.pieces_without_padding())
@@ -331,21 +239,6 @@ for move in logic.get_legal_moves(player2):
     moves.append(move)
 print(moves)
 ```
-
-
-      5 ·  ·  ♗ ♕ ♔
-      4 ·  ♙ ♙ ♙ ♙
-      3 ♖ ·  ·  ·  ·
-      2 ♟ ·  ♟ ♟ ♟
-      1 ♜ ·  ♝ ♛ ♚
-        a  b  c  d  e
-
-
-
-    All possible moves are:
-
-    [(36, 28), (38, 31), (39, 32), (40, 33), (40, 34), (43, 44), (43, 50), (43, 42), (45, 53), (45, 51), (45, 37), (45, 29), (46, 54), (46, 52), (46, 53), (47, 54), (47, 53), (47, 55), (47, 41), (47, 48)]
-
 
 
 ```python
@@ -360,21 +253,6 @@ print(moves)
 ```
 
 
-      5 ♜ ·  ·  ♛ ♚
-      4 ♟ ·  ♟ ♟ ♟
-      3 ♝ ·  ·  ·  ·
-      2 ·  ♙ ♙ ♙ ♙
-      1 ·  ·  ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 1 are:
-
-    [(37, 30), (37, 23), (37, 29), (38, 31), (39, 32), (40, 33)]
-
-
-
 ```python
 logic.execute_move((37,29),player1)
 g.display(logic.pieces_without_padding())
@@ -385,21 +263,6 @@ for move in logic.get_legal_moves(player2):
     moves.append(move)
 print(moves)
 ```
-
-
-      5 ·  ·  ♗ ♕ ♔
-      4 ·  ·  ♙ ♙ ♙
-      3 ♙ ·  ·  ·  ·
-      2 ♟ ·  ♟ ♟ ♟
-      1 ♜ ·  ·  ♛ ♚
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 2 are:
-
-    [(36, 28), (38, 31), (39, 32), (40, 33), (40, 34), (43, 44), (43, 45), (43, 50), (43, 42), (46, 54), (46, 52), (46, 53), (46, 45), (46, 44), (47, 54), (47, 53), (47, 55), (47, 41), (47, 48)]
-
 
 
 ```python
@@ -414,21 +277,6 @@ print(moves)
 ```
 
 
-      5 ♜ ♛ ·  ·  ♚
-      4 ♟ ·  ♟ ♟ ♟
-      3 ♙ ·  ·  ·  ·
-      2 ·  ·  ♙ ♙ ♙
-      1 ·  ·  ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 1 are:
-
-    [(38, 31), (39, 32), (40, 33), (45, 37)]
-
-
-
 ```python
 logic.execute_move((39,32),player1)
 g.display(logic.pieces_without_padding())
@@ -441,21 +289,6 @@ print(moves)
 ```
 
 
-      5 ·  ·  ♗ ♕ ♔
-      4 ·  ·  ♙ ·  ♙
-      3 ♙ ·  ·  ♙ ·
-      2 ♟ ·  ♟ ♟ ♟
-      1 ♜ ♛ ·  ·  ♚
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 2 are:
-
-    [(36, 28), (38, 31), (38, 32), (40, 33), (40, 32), (40, 34), (43, 50), (43, 42), (44, 52), (44, 50), (44, 37), (44, 30), (44, 23), (44, 16), (44, 9), (44, 45), (44, 46), (44, 51), (47, 54), (47, 53), (47, 55), (47, 41), (47, 46), (47, 48)]
-
-
-
 ```python
 logic.execute_move((44,37),player2)
 g.display(logic.pieces_without_padding())
@@ -466,21 +299,6 @@ for move in logic.get_legal_moves(player1):
     moves.append(move)
 print(moves)
 ```
-
-
-      5 ♜ ·  ·  ·  ♚
-      4 ♟ ♛ ♟ ♟ ♟
-      3 ♙ ·  ·  ♙ ·
-      2 ·  ·  ♙ ·  ♙
-      1 ·  ·  ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 1 are:
-
-    [(29, 23), (32, 24), (32, 26), (38, 31), (40, 33), (45, 37), (45, 39), (45, 33), (46, 39), (47, 39)]
-
 
 ## Section 7 -  Check Pawn to reach last move and become Queuen
 
@@ -498,21 +316,6 @@ print(moves)
 ```
 
 
-      5 ·  ·  ♗ ♕ ♔
-      4 ·  ·  ♙ ·  ♙
-      3 ♙ ·  ·  ·  ·
-      2 ♟ ♛ ♙ ♟ ♟
-      1 ♜ ·  ·  ·  ♚
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 2 are:
-
-    [(36, 28), (37, 45), (37, 53), (37, 29), (37, 31), (37, 25), (37, 19), (37, 30), (37, 23), (37, 16), (37, 9), (37, 38), (37, 44), (37, 51), (39, 32), (39, 25), (40, 33), (40, 34), (43, 44), (43, 45), (43, 46), (47, 45), (43, 50), (43, 42), (47, 54), (47, 53), (47, 55), (47, 41), (47, 46), (47, 48)]
-
-
-
 ```python
 logic.execute_move((37,25),player2)
 g.display(logic.pieces_without_padding())
@@ -525,21 +328,6 @@ print(moves)
 ```
 
 
-      5 ♜ ·  ·  ·  ♚
-      4 ♟ ·  ♙ ♟ ♟
-      3 ♙ ·  ·  ·  ·
-      2 ·  ·  ♙ ♛ ♙
-      1 ·  ·  ♗ ♕ ♔
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 1 are:
-
-    [(24, 17), (38, 31), (40, 33), (45, 37), (45, 39), (46, 39), (47, 39)]
-
-
-
 ```python
 logic.execute_move((24,17),player1)
 g.display(logic.pieces_without_padding())
@@ -550,21 +338,6 @@ for move in logic.get_legal_moves(player2):
     moves.append(move)
 print(moves)
 ```
-
-
-      5 ·  ·  ♗ ♕ ♔
-      4 ·  ·  ♙ ♛ ♙
-      3 ♙ ·  ·  ·  ·
-      2 ♟ ·  ·  ♟ ♟
-      1 ♜ ·  ♕ ·  ♚
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 2 are:
-
-    [(25, 33), (25, 41), (25, 31), (25, 37), (25, 17), (25, 19), (25, 18), (25, 26), (25, 32), (25, 24), (36, 28), (39, 32), (40, 33), (40, 34), (43, 44), (43, 45), (43, 50), (43, 42), (47, 54), (47, 53), (47, 55), (47, 41), (47, 46), (47, 48)]
-
 
 ## Section 8 - Complete the Game and check the winner
 
@@ -583,28 +356,146 @@ print(moves)
 ```
 
 
-      5 ♜ ·  ♕ ·  ♚
-      4 ♟ ·  ·  ♟ ♟
-      3 ♙ ·  ·  ·  ·
-      2 ·  ·  ♙ ·  ♙
-      1 ·  ·  ♗ ♕ ♛
-        a  b  c  d  e
-
-
-
-    All possible moves for Player 1 are:
-
-    [(17, 25), (17, 23), (17, 18), (17, 19), (17, 24), (17, 31), (17, 16), (17, 15), (38, 31), (38, 24), (40, 33), (45, 37), (45, 39), (45, 33), (46, 39), (46, 32), (46, 25), (46, 47)]
-
-
-
 ```python
 print(logic.is_win(player2))
 print(logic.is_win(player1))
 print(g.getGameEnded(logic.pieces_without_padding(),player2))
 ```
 
-    True
-    False
-    0
+## Section 9 - Normalize Actions to Ids
+
+- Every piece can take any position in 5 X 5 Grid
+- Queen Can move diagonally and straig from every cell (0,0), (0,1) .... (3,1) ... (4,4)
+- Similarly every piece can move to all possible positions constrained by their rule
+- We will store two hash maps
+- Action Identifier to Actions   { 51: ["Queen", "Cell 1", "Cell 10"], ... }
+- Action to Action Identifier    { "Queen:Cell1:Cell10": 242, ... }
+
+
+```python
+print(g.id_to_action[100])
+print(g.action_to_id["479:26:12"])
+```
+
+- Action size really huge compared to other board games because of different piece type and moves
+- This grows exponentially high once the board size starts growing (say n = 8)
+
+
+```python
+print(len(g.id_to_action))
+```
+
+## Section 10 - Get All Valid Moves in the MCTS consumable format
+
+Overal Chess Grid 5X5 Looks like this:
+
+        # Chess GRID with Padding and Cell Number
+        # [0,  1,  2,  3,  4,  5,  6]
+        # [7,  8,  9,  10, 11, 12, 13]
+
+        # [14,   15, 16, 17, 18, 19,     20]
+        # [21,   22, 23, 24, 25, 26,     27]
+        # [28,   29, 30, 31, 32, 33,     34]
+        # [35,   36, 37, 38, 39, 40,     41]
+        # [42,   43, 44, 45, 46, 47,     48]
+
+        # [49, 50, 51, 52, 53, 54, 55]
+        # [56, 57, 58, 59, 60, 61, 62]
+
+
+
+```python
+import numpy as np
+g = Game()
+nnet = nn(g)
+board = g.getInitBoard()
+n = 5 # 5X5 Grid
+logic = Board(n,board)
+print(np.array(board))
+print('\nAll possible moves for Player 2 are: \n')
+moves = []
+for move in logic.get_legal_moves(player2):
+    moves.append(move)
+print(moves)
+print(len(g.action_to_id))
+valids = g.getValidMoves(board,player1)
+print(len(valids))
+count = 0
+for i in valids:
+    if i == 1: count += 1
+print(count)
+print(len(moves))
+
+```
+
+## Section 11 - Train with MCTS
+
+- Changed Neural Network activation from softmax to sigmoid due to vanishing gradients
+- Never use numpy array and python array mixed
+- Rotation and player switching in canonical board might be conufusing
+
+
+```python
+from Coach import Coach
+from minichess.GardnerMiniChessGame import GardnerMiniChessGame as Game
+from minichess.keras.NNet import NNetWrapper as nn
+from utils import *
+
+args = dotdict({
+    'numIters': 10,
+    'numEps': 5,
+    'tempThreshold': 15,
+    'updateThreshold': 0.6,
+    'maxlenOfQueue': 200,
+    'arenaCompare': 10,
+    'numMCTSSims': 25,
+    'cpuct': 1,
+    'checkpoint': './temp/',
+    'load_model': False,
+    'load_folder_file': ('/dev/models/8x100x50', 'best.pth.tar'),
+    'numItersForTrainExamplesHistory': 20,
+})
+
+g = Game()
+nnet = nn(g)
+c = Coach(g, nnet, args)
+
+```
+
+
+```python
+c.executeEpisode()
+print()
+```
+
+
+    ♜ ♞ ♝ ♛ ♚
+    ♟ ♟ ♟ ♟ ♟
+    ·  ·  ·  ·  ·
+    ♙ ♙ ♙ ♙ ♙
+    ♖ ♘ ♗ ♕ ♔
+
+    ♜ ♞ ♝ ♛ ♚
+    ♟ ♟ ♟ ♟ ♟
+    ♙ ·  ·  ·  ·
+    ·  ♙ ♙ ♙ ♙
+    ♖ ♘ ♗ ♕ ♔
+
+    ♜ ·  ♝ ♛ ♚
+    ♟ ♟ ♟ ♟ ♟
+    ♙ ·  ♞ ·  ·
+    ·  ♙ ♙ ♙ ♙
+    ♖ ♘ ♗ ♕ ♔
+
+    ♜ ·  ♝ ♛ ♚
+    ♟ ♟ ♟ ♟ ♟
+    ♙ ♙ ♞ ·  ·
+    ·  ·  ♙ ♙ ♙
+    ♖ ♘ ♗ ♕ ♔
+
+    ♜ ·  ♝ ♛ ♚
+    ♟ ♟ ♟ ♟ ♟
+    ♙ ♙ ·  ·  ·
+    ·  ·  ♙ ♙ ♞
+    ♖ ♘ ♗ ♕ ♔
 
