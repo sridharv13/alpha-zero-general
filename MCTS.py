@@ -6,7 +6,7 @@ class MCTS():
     """
     This class handles the MCTS tree.
     """
-
+    MAX_TREE_DEPTH = 500
     def __init__(self, game, nnet, args):
         self.game = game
         self.nnet = nnet
@@ -15,7 +15,6 @@ class MCTS():
         self.Nsa = {}       # stores #times edge s,a was visited
         self.Ns = {}        # stores #times board s was visited
         self.Ps = {}        # stores initial policy (returned by neural net)
-
         self.Es = {}        # stores game.getGameEnded ended for board s
         self.Vs = {}        # stores game.getValidMoves for board s
 
@@ -30,10 +29,8 @@ class MCTS():
         """
         for i in range(self.args.numMCTSSims):
             self.search(canonicalBoard)
-
         s = self.game.stringRepresentation(canonicalBoard)
         counts = [self.Nsa[(s,a)] if (s,a) in self.Nsa else 0 for a in range(self.game.getActionSize())]
-
         if temp==0:
             bestA = np.argmax(counts)
             probs = [0]*len(counts)
@@ -45,7 +42,7 @@ class MCTS():
         return probs
 
 
-    def search(self, canonicalBoard):
+    def search(self, canonicalBoard, depth = 0):
         """
         This function performs one iteration of MCTS. It is recursively called
         till a leaf node is found. The action chosen at each node is one that
@@ -66,6 +63,9 @@ class MCTS():
         """
 
         s = self.game.stringRepresentation(canonicalBoard)
+        if depth >= MCTS.MAX_TREE_DEPTH:
+            self.Es[s] = -1e-4  # Assume draw state or loop state as failure
+            return -self.Es[s]
 
         if s not in self.Es:
             self.Es[s] = self.game.getGameEnded(canonicalBoard, 1)
@@ -79,7 +79,7 @@ class MCTS():
             valids = self.game.getValidMoves(canonicalBoard, 1)
             self.Ps[s] = self.Ps[s]*valids      # masking invalid moves
             sum_Ps_s = np.sum(self.Ps[s])
-            if sum_Ps_s > 0:
+            if (sum_Ps_s - 0) > 0:
                 self.Ps[s] /= sum_Ps_s    # renormalize
             else:
                 # if all valid moves were masked make all valid moves equally probable
@@ -114,7 +114,7 @@ class MCTS():
         next_s, next_player = self.game.getNextState(canonicalBoard, 1, a)
         next_s = self.game.getCanonicalForm(next_s, next_player)
 
-        v = self.search(next_s)
+        v = self.search(next_s,depth+1)
 
         if (s,a) in self.Qsa:
             self.Qsa[(s,a)] = (self.Nsa[(s,a)]*self.Qsa[(s,a)] + v)/(self.Nsa[(s,a)]+1)

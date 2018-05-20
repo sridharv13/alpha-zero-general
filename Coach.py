@@ -40,8 +40,6 @@ class Coach():
         """
         trainExamples = []
         board = self.game.getInitBoard()
-        print(' in board')
-        print(board)
         self.curPlayer = 1
         episodeStep = 0
 
@@ -51,6 +49,7 @@ class Coach():
             temp = int(episodeStep < self.args.tempThreshold)
             pi = self.mcts.getActionProb(canonicalBoard, temp=temp)
             sym = self.game.getSymmetries(canonicalBoard, pi)
+            # self.game.display(canonicalBoard,self.curPlayer)
             for b,p in sym:
                 trainExamples.append([b, self.curPlayer, p, None])
 
@@ -60,6 +59,8 @@ class Coach():
             r = self.game.getGameEnded(board, self.curPlayer)
 
             if r!=0:
+                self.game.display(canonicalBoard, self.curPlayer)
+                print('Player '+str(r)+' won')
                 res = [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
                 return res
 

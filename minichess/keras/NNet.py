@@ -14,21 +14,21 @@ import argparse
 from .MiniChessNNet import MiniChessNNet as onnet
 
 """
-NeuralNet wrapper class for the TicTacToeNNet.
+NeuralNet wrapper class for the MiniChess.
 
-Author: Evgeny Tyurin, github.com/evg-tyurin
-Date: Jan 5, 2018.
+Author: Karthik selvakumar, github.com/karthikselva
+Date: May 18, 2018.
 
 Based on (copy-pasted from) the NNet by SourKream and Surag Nair.
 """
 
 args = dotdict({
     'lr': 0.001,
-    'dropout': 0.3,
+    'dropout': 0.0,
     'epochs': 10,
     'batch_size': 64,
     'cuda': False,
-    'num_channels': 512,
+    'num_channels': 1024,
 })
 
 class NNetWrapper(NeuralNet):
@@ -53,14 +53,14 @@ class NNetWrapper(NeuralNet):
         """
         # timing
         start = time.time()
-
+        board = np.array(board)
         # preparing input
         board = board[np.newaxis, :, :]
 
         # run
         pi, v = self.nnet.model.predict(board)
 
-        print('PREDICTION TIME TAKEN : {0:03f}'.format(time.time()-start))
+        # print('PREDICTION TIME TAKEN : {0:03f}'.format(time.time()-start))
         return pi[0], v[0]
 
     def save_checkpoint(self, folder='checkpoint', filename='checkpoint.pth.tar'):
@@ -75,6 +75,7 @@ class NNetWrapper(NeuralNet):
     def load_checkpoint(self, folder='checkpoint', filename='checkpoint.pth.tar'):
         # https://github.com/pytorch/examples/blob/master/imagenet/main.py#L98
         filepath = os.path.join(folder, filename)
+        print(filepath)
         if not os.path.exists(filepath):
             raise("No model in path '{}'".format(filepath))
         self.nnet.model.load_weights(filepath)
