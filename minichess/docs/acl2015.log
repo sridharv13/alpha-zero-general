@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.19)  20 MAY 2018 01:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.19)  20 MAY 2018 18:13
 entering extended mode
 **./acl2015.tex
 (acl2015.tex
@@ -54,9 +54,6 @@ ef")
 )) (acl2015.sty
 Conference Style for ACL 2015 -- released December 7, 2014
 \titlebox=\skip43
-) ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.sty
-"
-Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 ) ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -137,19 +134,19 @@ s
 )
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 31.
+less on input line 30.
 
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less on input line 31.
+
+
+Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
 less on input line 32.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
 less on input line 33.
-
-
-Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 34.
 
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.
@@ -193,26 +190,32 @@ Package color Info: Driver file: pdftex.def on input line 147.
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang1.
 sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) (acl2015.aux)
+) (acl2015.aux
+
+LaTeX Warning: Label `fig:gameplay' multiply defined.
+
+
+LaTeX Warning: Label `font-table' multiply defined.
+
+
+LaTeX Warning: Label `font-table' multiply defined.
+
+)
 \openout1 = `acl2015.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 77.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
 
-("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-)
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
 ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -295,123 +298,159 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count106
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 78.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 78.
+(Font)              <12> on input line 77.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 78.
+(Font)              <8> on input line 77.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 78.
-LaTeX Font Info:    Try loading font information for U+lasy on input line 78.
+(Font)              <6> on input line 77.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 77.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 78.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 78.
-
-("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no ¨ in font ptmr7t!
-Missing character: There is no É in font ptmr7t!
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 95.
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ã in font ptmr7t!
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ã in font ptmr7t!
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ã in font ptmr7t!
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ã in font ptmr7t!
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ã in font ptmr7t!
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ã in font ptmr7t!
-
-Underfull \hbox (badness 1087) in paragraph at lines 96--97
-\OT1/ptm/m/n/10.95 arXiv that ex-tends Al-phaGo Zero meth-ods to
+Underfull \hbox (badness 1107) in paragraph at lines 80--82
+\OT1/cmr/m/n/10.95 come pop-u-lar af-ter the tremen-dous
  []
 
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ã in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ã in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ã in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ã in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ã in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ã in font cmr10!
 [1{C:/Users/karth/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 
 ]
-<distributed_arch.png, id=8, 451.08525pt x 283.96088pt>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 102.
+<gardner.png, id=8, 162.2311pt x 162.9839pt>
+File: gardner.png Graphic file (type png)
+<use gardner.png>
+Package pdftex.def Info: gardner.png  used on input line 108.
+(pdftex.def)             Requested size: 65.7265pt x 66.03297pt.
+<cnn.png, id=10, 625.21078pt x 152.44453pt>
+File: cnn.png Graphic file (type png)
+<use cnn.png>
+Package pdftex.def Info: cnn.png  used on input line 123.
+(pdftex.def)             Requested size: 219.08612pt x 53.41917pt.
+Missing character: There is no Ô in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+<distributed_arch.png, id=11, 451.08525pt x 283.96088pt>
 File: distributed_arch.png Graphic file (type png)
 <use distributed_arch.png>
-Package pdftex.def Info: distributed_arch.png  used on input line 119.
+Package pdftex.def Info: distributed_arch.png  used on input line 140.
 (pdftex.def)             Requested size: 219.08612pt x 137.91583pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 133.
-Missing character: There is no ‚ in font ptmb7t!
-Missing character: There is no Ä in font ptmb7t!
-Missing character: There is no ì in font ptmb7t!
-
-Overfull \hbox (16.99985pt too wide) in paragraph at lines 133--142
+ [2 <./gardner.png> <./cnn.png> <./distributed_arch.png>]
+Overfull \hbox (37.01085pt too wide) in paragraph at lines 190--197
  [] 
  []
 
-<gardner.png, id=10, 162.2311pt x 162.9839pt>
-File: gardner.png Graphic file (type png)
-<use gardner.png>
-Package pdftex.def Info: gardner.png  used on input line 163.
-(pdftex.def)             Requested size: 153.3596pt x 154.08028pt.
-<jacobs.png, id=11, 163.3603pt x 160.72546pt>
-File: jacobs.png Graphic file (type png)
-<use jacobs.png>
-Package pdftex.def Info: jacobs.png  used on input line 167.
-(pdftex.def)             Requested size: 153.3596pt x 150.88576pt.
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ì in font ptmr7t!
-Missing character: There is no ‚ in font ptmr7t!
-Missing character: There is no Ä in font ptmr7t!
-Missing character: There is no ì in font ptmr7t!
-<wallet.png, id=12, 161.47829pt x 162.2311pt>
-File: wallet.png Graphic file (type png)
-<use wallet.png>
-Package pdftex.def Info: wallet.png  used on input line 171.
-(pdftex.def)             Requested size: 153.3596pt x 154.08151pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Underfull \hbox (badness 1024) in paragraph at lines 204--205
+\OT1/cmr/m/n/10.95 Our model per-forms bet-ter than Ran-dom
+ []
 
-[2 <./distributed_arch.png>] [3
 
- <./gardner.png> <./jacobs.png> <./wallet.png>]
-(acl2015.aux)
+Underfull \hbox (badness 2426) in paragraph at lines 217--218
+\OT1/cmr/m/n/10.95 Our code can be found at this Github
+ []
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
+\OT1/cmr/m/n/10.95 repos-i-tory un-der the branch minichess
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
+\OT1/cmr/m/n/10.95 https://github.com/karthikselva/alpha-zero-
+ []
+
+[3]
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+Missing character: There is no Ô in font cmti10!
+Missing character: There is no ¨ in font cmti10!
+Missing character: There is no Å in font cmti10!
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+Missing character: There is no Ô in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no Ô in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+Missing character: There is no Ô in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no Å in font cmr10!
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+Missing character: There is no Ô in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no Å in font cmr10!
+Missing character: There is no ‚ in font cmti10!
+Missing character: There is no Ä in font cmti10!
+Missing character: There is no ì in font cmti10!
+
+Overfull \hbox (1.26833pt too wide) in paragraph at lines 277--287
+ [] 
+ []
+
+[4] (acl2015.aux)
+
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4720 strings out of 493305
- 73667 string characters out of 3129802
- 162603 words of memory out of 3000000
- 8192 multiletter control sequences out of 15000+200000
- 20562 words of font info for 48 fonts, out of 3000000 for 9000
+ 4631 strings out of 493305
+ 72159 string characters out of 3129802
+ 163560 words of memory out of 3000000
+ 8121 multiletter control sequences out of 15000+200000
+ 9797 words of font info for 37 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,11n,43p,1485b,450s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
-}<C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrr
-8a.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/
-utmb8a.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/ti
-mes/utmr8a.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/ur
-w/times/utmri8a.pfb>
-Output written on acl2015.pdf (3 pages, 342091 bytes).
+ 42i,11n,43p,1435b,365s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/karth/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/karth/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/kar
+th/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr8.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmti10.pfb><C:/Users/karth/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on acl2015.pdf (4 pages, 326950 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
+ 62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
