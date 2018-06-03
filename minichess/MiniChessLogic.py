@@ -105,8 +105,8 @@ class Board:
 
         # Reducing the recursion space of MCTS by giving priority to attack moves over passive moves
         # If they do exist otherwise do a passive move
-        # if len(attack_moves) > 0:
-            # moves = attack_moves
+        if len(attack_moves) > 0:
+            moves = attack_moves
         return moves
 
     def _get_legal_moves(self,player):
