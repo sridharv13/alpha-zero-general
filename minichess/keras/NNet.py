@@ -9,7 +9,7 @@ import sys
 sys.path.append('..')
 from utils import *
 from NeuralNet import NeuralNet
-
+from keras.callbacks import TensorBoard
 import argparse
 from .MiniChessNNet import MiniChessNNet as onnet
 
@@ -24,7 +24,7 @@ Based on (copy-pasted from) the NNet by SourKream and Surag Nair.
 
 args = dotdict({
     'lr': 0.001,
-    'dropout': 0.0,
+    'dropout': 0.2,
     'epochs': 10,
     'batch_size': 64,
     'cuda': False,
@@ -45,7 +45,13 @@ class NNetWrapper(NeuralNet):
         input_boards = np.asarray(input_boards)
         target_pis = np.asarray(target_pis)
         target_vs = np.asarray(target_vs)
-        self.nnet.model.fit(x = input_boards, y = [target_pis, target_vs], batch_size = args.batch_size, epochs = args.epochs)
+        tensorboard = TensorBoard(log_dir='./logs', histogram_freq=0,
+                                  write_graph=True, write_images=False)
+        self.nnet.model.fit(x = input_boards,
+                            y = [target_pis, target_vs],
+                            batch_size = args.batch_size,
+                            epochs = args.epochs,
+                            callbacks = [tensorboard])
 
     def predict(self, board):
         """

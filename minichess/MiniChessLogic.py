@@ -242,8 +242,8 @@ class Board:
                         out.append(bcolors.OKGREEN + uni_pieces.get(p) + bcolors.ENDC)
                     else:
                         out.append(uni_pieces.get(p))
-                out = '\t'.join(out)
+                out = ' '.join(out)
             print(out)
-        # for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
-        # time.sleep(1)
+        for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
+        time.sleep(1)
         # print('    a  b  c  d  e  \n\n')

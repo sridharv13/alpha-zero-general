@@ -109,14 +109,14 @@ class GardnerMiniChessGame(Game):
 
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
-        valids = [0]*self.getActionSize()
+        valids = [0.0]*self.getActionSize()
         b = Board(self.n,board)
         if not b.has_legal_moves(player):
-            valids[-1]=1
+            valids[-1]=1.0
             return np.array(valids)
         for (p, x, y) in b.get_legal_moves(player):
             key = str(p)+":"+str(x)+":"+str(y)
-            valids[self.action_to_id[key]] = 1
+            valids[self.action_to_id[key]] = 1.0
         return np.array(valids)
 
     def getGameEnded(self, board, player):

@@ -64,7 +64,7 @@ class MCTS():
 
         s = self.game.stringRepresentation(canonicalBoard)
         if depth >= MCTS.MAX_TREE_DEPTH:
-            self.Es[s] = -1e-4  # Assume draw state or loop state as failure
+            self.Es[s] = 1e-4  # Assume draw state or loop state as failure
             return -self.Es[s]
 
         if s not in self.Es:
@@ -77,8 +77,17 @@ class MCTS():
             # leaf node
             self.Ps[s], v = self.nnet.predict(canonicalBoard)
             valids = self.game.getValidMoves(canonicalBoard, 1)
+            sum_Ps_s = np.sum(self.Ps[s])
+            # print(sum_Ps_s)
+            # print(self.Ps[s])
+
             self.Ps[s] = self.Ps[s]*valids      # masking invalid moves
             sum_Ps_s = np.sum(self.Ps[s])
+            # print(canonicalBoard)
+            # print(self.Ps[s])
+            # print(len(self.Ps[s]))
+            # print(v)
+            # print(sum_Ps_s)
             if (sum_Ps_s - 0) > 0:
                 self.Ps[s] /= sum_Ps_s    # renormalize
             else:
@@ -86,7 +95,7 @@ class MCTS():
                 
                 # NB! All valid moves may be masked if either your NNet architecture is insufficient or you've get overfitting or something else.
                 # If you have got dozens or hundreds of these messages you should pay attention to your NNet and/or training process.   
-                print("All valid moves were masked, do workaround.")
+                # print("All valid moves were masked, do workaround.")
                 self.Ps[s] = self.Ps[s] + valids
                 self.Ps[s] /= np.sum(self.Ps[s])
 

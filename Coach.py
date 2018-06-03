@@ -6,7 +6,7 @@ from pytorch_classification.utils import Bar, AverageMeter
 import time, os, sys
 from pickle import Pickler, Unpickler
 from random import shuffle
-
+import boto3
 
 class Coach():
     """
@@ -49,7 +49,7 @@ class Coach():
             temp = int(episodeStep < self.args.tempThreshold)
             pi = self.mcts.getActionProb(canonicalBoard, temp=temp)
             sym = self.game.getSymmetries(canonicalBoard, pi)
-            # self.game.display(canonicalBoard,self.curPlayer)
+            self.game.display(canonicalBoard,self.curPlayer)
             for b,p in sym:
                 trainExamples.append([b, self.curPlayer, p, None])
 
@@ -133,6 +133,11 @@ class Coach():
                 print('ACCEPTING NEW MODEL')
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename=self.getCheckpointFile(i))
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')                
+
+    def write_to_s3(self,data):
+        s3 = boto3.resource('s3')
+        object = s3.Object('my_bucket_name', 'my/key/including/filename.txt')
+        object.put(Body=data)
 
     def getCheckpointFile(self, iteration):
         return 'checkpoint_' + str(iteration) + '.pth.tar'
