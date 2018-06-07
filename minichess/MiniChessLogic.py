@@ -231,7 +231,7 @@ class Board:
         for i, row in enumerate(result):
             out = ''
             if not color_output:
-                out = ' '.join(uni_pieces.get(p*player) for p in row)
+                out = ' '.join(uni_pieces.get(p*player) for p in row) + '                            '
             else:
                 out = []
                 for p in row:
