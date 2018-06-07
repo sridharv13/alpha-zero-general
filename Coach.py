@@ -43,6 +43,8 @@ class Coach():
         self.curPlayer = 1
         episodeStep = 0
 
+        moves = 0
+        max_moves = 200
         while True:
             episodeStep += 1
             canonicalBoard = self.game.getCanonicalForm(board,self.curPlayer)
@@ -57,9 +59,11 @@ class Coach():
             board, self.curPlayer = self.game.getNextState(board, self.curPlayer, action)
 
             r = self.game.getGameEnded(board, self.curPlayer)
-
+            moves += 1
+            if moves > max_moves:
+                r = 1e-4
             if r!=0:
-                self.game.display(canonicalBoard, self.curPlayer)
+                self.game.display(canonicalBoard, -self.curPlayer)
                 print('Player '+str(r)+' won')
                 res = [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
                 return res

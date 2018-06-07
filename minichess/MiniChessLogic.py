@@ -103,8 +103,8 @@ class Board:
             moves.append((p,start,end))
             if flat_pieces[end] < 0: attack_moves.append((p,start,end))
 
-        # Reducing the recursion space of MCTS by giving priority to attack moves over passive moves
-        # If they do exist otherwise do a passive move
+        # Reducing the recursion space of MCTS by giving priority to attack moves
+        # over passive moves if they do exist otherwise do a passive move
         if len(attack_moves) > 0:
             moves = attack_moves
         return moves
@@ -245,5 +245,5 @@ class Board:
                 out = ' '.join(out)
             print(out)
         for i in range(6): sys.stdout.write("\033[F")  # Cursor up one line
-        time.sleep(1)
+        # time.sleep(1)
         # print('    a  b  c  d  e  \n\n')

@@ -6,7 +6,7 @@ class MCTS():
     """
     This class handles the MCTS tree.
     """
-    MAX_TREE_DEPTH = 500
+    MAX_TREE_DEPTH = 200
     def __init__(self, game, nnet, args):
         self.game = game
         self.nnet = nnet
