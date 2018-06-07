@@ -37,6 +37,8 @@ class Arena():
         curPlayer = 1
         board = self.game.getInitBoard()
         it = 0
+        moves = 0
+        max_moves = 200
         while self.game.getGameEnded(board, curPlayer)==0:
             it+=1
             if verbose:
@@ -51,6 +53,9 @@ class Arena():
                 print(action)
                 assert valids[action] >0
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
+            if moves > max_moves:
+                break
+            moves += 1
         if verbose:
             assert(self.display)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
