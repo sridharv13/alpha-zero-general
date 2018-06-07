@@ -30,4 +30,4 @@ if __name__ == "__main__" :
     if args.load_model:
         print("Load trainExamples from file")
         c.loadTrainExamples()
-    c.saveTrainExamples(0)
+    c.learn()
