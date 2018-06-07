@@ -4,8 +4,9 @@ from minichess.keras.NNet import NNetWrapper as nn
 from utils import *
 
 args = dotdict({
+    'generator_id': 'machine_1',
     'numIters': 100,
-    'numEps': 50,
+    'numEps': 5,
     'tempThreshold': 15,
     'updateThreshold': 0.6,
     'maxlenOfQueue': 200,
@@ -29,4 +30,4 @@ if __name__ == "__main__" :
     if args.load_model:
         print("Load trainExamples from file")
         c.loadTrainExamples()
-    c.learn()
+    c.saveTrainExamples(0)

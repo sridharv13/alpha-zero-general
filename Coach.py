@@ -138,9 +138,10 @@ class Coach():
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename=self.getCheckpointFile(i))
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')                
 
-    def write_to_s3(self,data):
+    def write_to_s3(self,filename,data):
         s3 = boto3.resource('s3')
-        object = s3.Object('my_bucket_name', 'my/key/including/filename.txt')
+        object = s3.Object('minichess', filename)
+        print(object)
         object.put(Body=data)
 
     def getCheckpointFile(self, iteration):
@@ -150,10 +151,13 @@ class Coach():
         folder = self.args.checkpoint
         if not os.path.exists(folder):
             os.makedirs(folder)
-        filename = os.path.join(folder, self.getCheckpointFile(iteration)+".examples")
+        s3_key_name = self.getCheckpointFile(iteration)+"."+self.args.generator_id+".examples"
+        filename = os.path.join(folder, self.getCheckpointFile(iteration)+"."+self.args.generator_id+".examples")
         with open(filename, "wb+") as f:
             Pickler(f).dump(self.trainExamplesHistory)
         f.closed
+        print(self.write_to_s3(s3_key_name,open(filename,"rb").read()))
+
 
     def loadTrainExamples(self):
         modelFile = os.path.join(self.args.load_folder_file[0], self.args.load_folder_file[1])
