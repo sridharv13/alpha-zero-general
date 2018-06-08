@@ -44,7 +44,7 @@ class Arena():
             if verbose:
                 assert(self.display)
                 print("Turn ", str(it), "Player ", str(curPlayer))
-                self.display(board,curPlayer)
+                self.display(self.game,board,curPlayer)
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
@@ -59,7 +59,7 @@ class Arena():
         if verbose:
             assert(self.display)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
-            self.display(board)
+            self.display(self.game,board,curPlayer)
         return self.game.getGameEnded(board, 1)
 
     def playGames(self, num, verbose=False):
@@ -119,7 +119,7 @@ class Arena():
         white_start = (oneWon - black_start[0],twoWon - black_start[1],draws - black_start[2])
         print('')
         print('Neural network as Black - Wins of (NN Won,Opponent Won,Draw) :' + str(black_start))
-        print('Neural network as White - Wins of (NN,Random,Draw) :' + str(white_start))
+        print('Neural network as White - Wins of (NN Won,Opponent Won,Draw) :' + str(white_start))
         bar.finish()
 
         return oneWon, twoWon, draws

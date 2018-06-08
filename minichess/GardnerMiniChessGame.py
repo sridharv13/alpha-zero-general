@@ -155,5 +155,5 @@ class GardnerMiniChessGame(Game):
         Board(self.n, board).display(player)
 
 
-def display(self,board,player):
-    Board(self.n,board).display(player)
+def display(game,board,player):
+    Board(game.n,board).display(player)
