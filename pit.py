@@ -1,6 +1,8 @@
 import Arena
 from MCTS import MCTS
 from minichess.GardnerMiniChessGame import GardnerMiniChessGame, display
+from minichess.BabyChessGame import BabyChessGame, display
+from minichess.MalletChessGame import MalletChessGame, display
 from minichess.MiniChessPlayer import *
 from minichess.keras.NNet import NNetWrapper as NNet
 
@@ -75,4 +77,58 @@ print(' Neural Network (v21) vs Neural Network (v6)')
 print('----------------------------------------')
 
 arena = Arena.Arena(n21p, n6p, g, display=display)
+print(arena.playGames(20, verbose=False))
+
+g = BabyChessGame(5)
+
+# all players
+rp1 = RandomPlayer(g).play
+rp2 = RandomPlayer(g).play
+gp1 = GreedyPlayer(g).play
+
+# nnet players
+n21 = NNet(g)
+n21.load_checkpoint('./pretrained_models/minichess/keras/','best.pth.tar')
+args1 = dotdict({'numMCTSSims': 200, 'cpuct':1.0})
+mcts1 = MCTS(g, n21, args1)
+n21p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
+
+print('')
+print('Baby Chess -  Neural Network (v21) vs Random Player')
+print('----------------------------------------')
+arena = Arena.Arena(n21p, rp1, g, display=display)
+print(arena.playGames(20, verbose=False))
+
+print('')
+print('Baby Chess -  Neural Network (v21) vs Greedy Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n21p, gp1, g, display=display)
+print(arena.playGames(20, verbose=False))
+
+g = MalletChessGame(5)
+
+# all players
+rp1 = RandomPlayer(g).play
+rp2 = RandomPlayer(g).play
+gp1 = GreedyPlayer(g).play
+
+# nnet players
+n21 = NNet(g)
+n21.load_checkpoint('./pretrained_models/minichess/keras/','best.pth.tar')
+args1 = dotdict({'numMCTSSims': 200, 'cpuct':1.0})
+mcts1 = MCTS(g, n21, args1)
+n21p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
+
+print('')
+print('Mallet Chess -  Neural Network (v21) vs Random Player')
+print('----------------------------------------')
+arena = Arena.Arena(n21p, rp1, g, display=display)
+print(arena.playGames(20, verbose=False))
+
+print('')
+print('Mallet Chess -  Neural Network (v21) vs Greedy Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n21p, gp1, g, display=display)
 print(arena.playGames(20, verbose=False))
