@@ -56,8 +56,11 @@
 %-----------------------------------------------------------
 
 \usepackage{graphicx}  % Required for including images
-
 \usepackage{booktabs} % Top and bottom rules for tables
+
+%multi-row
+\usepackage{multirow}
+ 
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION 
@@ -87,6 +90,8 @@
 
 \begin{column}{\onecolwid} % The first column
 
+\setbeamercolor{block alerted title}{fg=black,bg=ngreen} % Change the alert block title colors
+\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
 %----------------------------------------------------------------------------------------
 %	OBJECTIVES
 %----------------------------------------------------------------------------------------
@@ -106,27 +111,25 @@ Using WebRTC we are trying to develop a product called 'Ping' used for audio, mu
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Introduction}
+\begin{block}{Logic and MCTS}
 
 \begin{itemize}
 \item WebRTC is an upcoming standard that aims to improve real time communication among web browsers in peer to peer fashion.
 \item Ping uses WebRTC which allows browsers to natively support interactive peer to peer communication and realtime collaboration.
-\item Ping is a low cost highly efficient solution for data communication.
-\item Ping improves the state of audio/video communi									cation stack in the browser
-\item Ping leverages the specification to achieve interoperability among web browsers.
-\item Unlike existing systems, Ping doesn't require any plugins, extensions and signups. 
 \end{itemize}
 
+\begin{figure}
+\includegraphics[width=1.0\linewidth]{minichess.png}
+\caption{Popular Minichess Board Layouts}
+\end{figure}
+
+
+\[ l = \sum (v_{\theta}(s_{t}) - z_{t})^{2}+ \vec{\pi_{t}} log(\vec{p_{\theta}}(s_{t}))  \]
 
 
 \end{block}
 
 %------------------------------------------------
-
-\begin{figure}
-\includegraphics[width=1.0\linewidth]{distributed_arch.png}
-\caption{Architecture of Ping}
-\end{figure}
 
 %----------------------------------------------------------------------------------------
 
@@ -144,19 +147,19 @@ Using WebRTC we are trying to develop a product called 'Ping' used for audio, mu
 %	MATERIALS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Architecture}
+\begin{block}{Distributed Architecture}
 
 We designed an efficient architecture for Ping to withstand high traffic.
 
 \begin{itemize}
 \item At start browsers do not know each other.
 \item WebRTC mediates the setup process through the XMPP server of Ping.
-\item All browsers connected to a particular media object are called to be a part of a swarm and are assigned unique id's.
-\item Browsers speak to other browsers in the swarm.
-\item Media flows through the shortest possible path for latency.
-\item An XMPP server in the backend is used for signalling and initial connection.
 \end{itemize}
 
+\begin{figure}
+\includegraphics[width=1.0\linewidth]{distributed_arch.png}
+\caption{Distributed Cloud Architecture for Reinforcement Learning}
+\end{figure}
 
 
 \end{block}
@@ -171,16 +174,12 @@ We designed an efficient architecture for Ping to withstand high traffic.
 %	METHODS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Security}
+\begin{block}{Performance Gain Distributed vs Single Instance}
+\begin{figure}
+\includegraphics[width=1.0\linewidth]{performance_gain.png}
+\caption{Distributed Cloud Architecture for Reinforcement Learning}
+\end{figure}
 
-\begin{itemize}
-\item Ping is resistant to several security problems.
-\item Ping implementations use secure protocols such as DTLS and SRTP.
-\item Encryption is mandatory for all Ping components including signaling mechanism.
-\item Ping runs in a browser sandbox and is not a separate process. 
-\item Ping doesn't require separate plugins or components.
-\item Hashes of the end objects are compared to find any packet loss.
-\end{itemize}
 
 \end{block}
 
@@ -206,19 +205,24 @@ We designed an efficient architecture for Ping to withstand high traffic.
 %	MATHEMATICAL SECTION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Peer Connection}
+\begin{block}{Neural Network and hyperparams}
 
 \begin{itemize}
 \item RTC Peer connection is the WebRTC API that handles stable and efficient communication of streaming data between peers.
-\item In the real world WebRTC needs servers so the following can happen:
-\item Browsers discover each other and exchange details like browser name, version, configuration and unique id's.
-\item WebRTC client applications (Peers) exchange network information.
-\item Peers exchange data about media such as video format and resolution.
 \end{itemize}
 
+
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{peeeeer.jpg}
-\caption{Why WebRTC}
+\includegraphics[width=0.3\linewidth]{overall_loss.png}
+\includegraphics[width=0.3\linewidth]{pi_loss.png}
+\includegraphics[width=0.3\linewidth]{value_loss.png}
+\caption{Loss values after each epoch}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{cnn.png}
+\caption{Baseline Random vs Greedy vs Neural Net}
 \end{figure}
 
 \end{block}
@@ -233,22 +237,18 @@ We designed an efficient architecture for Ping to withstand high traffic.
 %	RESULTS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Why WebRTC}
+\begin{block}{Baseline Random vs Greedy vs Neural Net}
+
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{why.jpg}
-\caption{Why WebRTC}
+\includegraphics[width=0.8\linewidth]{baseline.png}
+\caption{Baseline Random vs Greedy vs Neural Net}
 \end{figure}
 
-
-\begin{itemize}
-\item WebRTC is open source so we don't have problems with privacy.
-\item WebRTC improves connectivity and reduces data costs.
-\item WebRTC improves latency and is simple to work with.
-\item WebRTC guarantees high scalability and efficiency even for low bandwidth connections.
-\end{itemize}
-
-
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{diff_layouts.png}
+\caption{Best Model on directly used on different layouts}
+\end{figure}
 
 \end{block}
 
@@ -264,22 +264,35 @@ We designed an efficient architecture for Ping to withstand high traffic.
 
 \begin{column}{\onecolwid} % The third column
 
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{whatt.png}
-\caption{Why WebRTC}
-\end{figure}
-
 
 %----------------------------------------------------------------------------------------
 %	CONCLUSION
 %----------------------------------------------------------------------------------------
+
+\begin{block}{Iteration to Reach the performance}
+
+\begin{itemize}
+\item Though there are existing systems like Skype and Hangouts, Ping guarentees around 60\% more efficiency.
+\item Ping also guarentees high scalability. Around 3000 users per second.
+\item As WebRTC is leveraging communication, Ping uses WebRTC to improved end user experience.
+\end{itemize}
+
+\end{block}
+
+\begin{block}{Interesting Moves and Neural Net values}
+
+\begin{itemize}
+\item Though there are existing systems like Skype and Hangouts, Ping guarentees around 60\% more efficiency.
+\end{itemize}
+
+\end{block}
+
 
 \begin{block}{Conclusion}
 
 \begin{itemize}
 \item Though there are existing systems like Skype and Hangouts, Ping guarentees around 60\% more efficiency.
 \item Ping also guarentees high scalability. Around 3000 users per second.
-\item As WebRTC is leveraging communication, Ping uses WebRTC to improved end user experience.
 \end{itemize}
 
 \end{block}
@@ -296,10 +309,12 @@ We designed an efficient architecture for Ping to withstand high traffic.
 
 \begin{block}{References}
 
-\begin{itemize}
-\item https://webrtc.org
-\item https://mozilla.org/webrtc
-\item https://github.com/webrtc
+
+\begin{itemize}{}
+
+\item Gardner's Minichess Variant is solved. Mehdi Mhalla et al. {\em arXiv e-print (arXiv:1307.7118) }
+\item Learning to Play Othello Without Human Knowledge Surag Nair et al {\em github.com/suragnair/alpha-zero-general}
+\item Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm. Silver et al. 2017a
 \end{itemize}
 
 \end{block}
@@ -314,15 +329,13 @@ We designed an efficient architecture for Ping to withstand high traffic.
 %	CONTACT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
-\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
 
 \begin{alertblock}{Contact Information}
 
 \begin{itemize}
-\item Web: \href{http://www.pingapp.xyz}{http://www.pingapp.xyz}
+\item Web: \href{https://github.com/karthikselva/alpha-zero-general/tree/minichess}{https://github.com/karthikselva/alpha-zero-general/tree/minichess}
+\item Email: karthik0@stanford.edu
 \end{itemize}
-\item wasim@thabraze.me
 
 \end{alertblock}
 

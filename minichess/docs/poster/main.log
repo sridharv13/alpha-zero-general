@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.2)  8 JUN 2018 11:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.2)  8 JUN 2018 17:38
 entering extended mode
 **./main.tex
 (main.tex
@@ -1098,31 +1098,39 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@thisruleclass=\count177
 \@lastruleclass=\count178
 \@thisrulewidth=\dimen270
+)
+("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\multirow\multirow.
+sty"
+Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\multirow@colwidth=\skip78
+\multirow@cntb=\count179
+\multirow@dima=\skip79
+\bigstrutjot=\dimen271
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 74.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 74.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 77.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 74.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 77.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1165,16 +1173,16 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
 ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count179
-\scratchdimen=\dimen271
+\scratchcounter=\count180
+\scratchdimen=\dimen272
 \scratchbox=\box60
-\nofMPsegments=\count180
-\nofMParguments=\count181
+\nofMPsegments=\count181
+\nofMParguments=\count182
 \everyMPshowfont=\toks47
-\MPscratchCnt=\count182
-\MPscratchDim=\dimen272
-\MPnumerator=\count183
-\makeMPintoPDFobject=\count184
+\MPscratchCnt=\count183
+\MPscratchDim=\dimen273
+\MPnumerator=\count184
+\makeMPintoPDFobject=\count185
 \everyMPtoPDFconversion=\toks48
 )
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-
@@ -1193,7 +1201,7 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 ) ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box61
-Package hyperref Info: Link coloring OFF on input line 74.
+Package hyperref Info: Link coloring OFF on input line 77.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.s
 ty"
@@ -1203,11 +1211,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 estring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count185
+\c@section@level=\count186
 )
-LaTeX Info: Redefining \ref on input line 74.
-LaTeX Info: Redefining \pageref on input line 74.
-LaTeX Info: Redefining \nameref on input line 74.
+LaTeX Info: Redefining \ref on input line 77.
+LaTeX Info: Redefining \pageref on input line 77.
+LaTeX Info: Redefining \nameref on input line 77.
  (main.out) (main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
@@ -1237,74 +1245,103 @@ Dictionary: translator-numbers-dictionary, Language: English
 tor-theorem-dictionary-English.dict"
 Dictionary: translator-theorem-dictionary, Language: English 
 ) ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 74.
+LaTeX Info: Redefining \selectfont on input line 77.
 
 (main.nav)
-LaTeX Font Info:    Calculating math sizes for size <17.86> on input line 74.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 74.
+LaTeX Font Info:    Calculating math sizes for size <17.86> on input line 77.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 77.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 74.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 77.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 74.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 77.
 
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 74.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 77.
 
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <17.86> on input line 74.
+(Font)              <17.86> on input line 77.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12.50194> on input line 74.
+(Font)              <12.50194> on input line 77.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8.93> on input line 74.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 336.
+(Font)              <8.93> on input line 77.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 349.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Calculating math sizes for size <37.03> on input line 336.
+LaTeX Font Info:    Calculating math sizes for size <37.03> on input line 349.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <37.03> on input line 336.
+(Font)              <37.03> on input line 349.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <25.92088> on input line 336.
+(Font)              <25.92088> on input line 349.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <18.515> on input line 336.
-<distributed_arch.png, id=14, 451.08525pt x 283.96088pt>
+(Font)              <18.515> on input line 349.
+<minichess.png, id=14, 500.24391pt x 153.57375pt>
+File: minichess.png Graphic file (type png)
+<use minichess.png>
+Package pdftex.def Info: minichess.png  used on input line 349.
+(pdftex.def)             Requested size: 763.17543pt x 234.31795pt.
+<distributed_arch.png, id=16, 451.08525pt x 283.96088pt>
 File: distributed_arch.png Graphic file (type png)
 <use distributed_arch.png>
-Package pdftex.def Info: distributed_arch.png  used on input line 336.
+Package pdftex.def Info: distributed_arch.png  used on input line 349.
 (pdftex.def)             Requested size: 763.17543pt x 480.44366pt.
-<peeeeer.jpg, id=16, 344.28625pt x 193.72375pt>
-File: peeeeer.jpg Graphic file (type jpg)
-<use peeeeer.jpg>
-Package pdftex.def Info: peeeeer.jpg  used on input line 336.
-(pdftex.def)             Requested size: 610.54266pt x 343.5768pt.
-<why.jpg, id=17, 352.31625pt x 193.72375pt>
-File: why.jpg Graphic file (type jpg)
-<use why.jpg>
-Package pdftex.def Info: why.jpg  used on input line 336.
-(pdftex.def)             Requested size: 610.54266pt x 335.71388pt.
-<whatt.png, id=18, 351.3125pt x 193.72375pt>
-File: whatt.png Graphic file (type png)
-<use whatt.png>
-Package pdftex.def Info: whatt.png  used on input line 336.
-(pdftex.def)             Requested size: 610.54266pt x 336.72778pt.
+<performance_gain.png, id=17, 500.62032pt x 305.64188pt>
+File: performance_gain.png Graphic file (type png)
+<use performance_gain.png>
+Package pdftex.def Info: performance_gain.png  used on input line 349.
+(pdftex.def)             Requested size: 763.17543pt x 465.98889pt.
+<overall_loss.png, id=18, 296.98453pt x 207.02344pt>
+File: overall_loss.png Graphic file (type png)
+<use overall_loss.png>
+Package pdftex.def Info: overall_loss.png  used on input line 349.
+(pdftex.def)             Requested size: 228.95496pt x 159.60753pt.
+<pi_loss.png, id=19, 298.11375pt x 208.52907pt>
+File: pi_loss.png Graphic file (type png)
+<use pi_loss.png>
+Package pdftex.def Info: pi_loss.png  used on input line 349.
+(pdftex.def)             Requested size: 228.95496pt x 160.15422pt.
+<value_loss.png, id=20, 300.7486pt x 208.52907pt>
+File: value_loss.png Graphic file (type png)
+<use value_loss.png>
+Package pdftex.def Info: value_loss.png  used on input line 349.
+(pdftex.def)             Requested size: 228.95496pt x 158.75418pt.
+<cnn.png, id=21, 625.21078pt x 152.44453pt>
+File: cnn.png Graphic file (type png)
+<use cnn.png>
+Package pdftex.def Info: cnn.png  used on input line 349.
+(pdftex.def)             Requested size: 610.54266pt x 148.87123pt.
+<baseline.png, id=22, 406.89516pt x 198.7425pt>
+File: baseline.png Graphic file (type png)
+<use baseline.png>
+Package pdftex.def Info: baseline.png  used on input line 349.
+(pdftex.def)             Requested size: 610.54266pt x 298.2252pt.
+<diff_layouts.png, id=23, 348.17578pt x 162.2311pt>
+File: diff_layouts.png Graphic file (type png)
+<use diff_layouts.png>
+Package pdftex.def Info: diff_layouts.png  used on input line 349.
+(pdftex.def)             Requested size: 610.54266pt x 284.52007pt.
 
-Overfull \hbox (4.99402pt too wide) detected at line 336
+Overfull \hbox (4.99402pt too wide) detected at line 349
 [][][] [][][][][][][][][] [][][][][][][][][] [][][][][][][][][] [][][][][][][][
 ][] [][][][][][][][][] [][][][][][][] 
+ []
+
+
+Overfull \vbox (43.24635pt too high) detected at line 349
  []
 
 
@@ -1314,7 +1351,9 @@ Overfull \hbox (88.20334pt too wide) has occurred while \output is active
 
 [1{C:/Users/karth/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
- <./distributed_arch.png> <./peeeeer.jpg> <./why.jpg> <./whatt.png (PNG copy)>]
+ <./minichess.png> <./distributed_arch.png> <./performance_gain.png> <./overall
+_loss.png> <./pi_loss.png> <./value_loss.png> <./cnn.png> <./baseline.png> <./d
+iff_layouts.png>]
 \tf@nav=\write6
 \openout6 = `main.nav'.
 
@@ -1324,33 +1363,39 @@ Overfull \hbox (88.20334pt too wide) has occurred while \output is active
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 338.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 338.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 338.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 338.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22332 strings out of 493305
- 441849 string characters out of 3129803
- 575970 words of memory out of 3000000
- 25342 multiletter control sequences out of 15000+200000
- 63728 words of font info for 60 fonts, out of 3000000 for 9000
+ 22422 strings out of 493305
+ 443563 string characters out of 3129803
+ 574283 words of memory out of 3000000
+ 25423 multiletter control sequences out of 15000+200000
+ 65201 words of font info for 60 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,16n,71p,773b,1442s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-maths
-y.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-e
-c.enc}<C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/l
-mbx12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-lm/lmr17.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/lm/lmss17.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/lm/lmssbx10.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/
-type1/public/lm/lmsy10.pfb>
-Output written on main.pdf (1 page, 340253 bytes).
+{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
+c}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathe
+x.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-r
+m.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
+athit.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
+lm-mathsy.enc}<C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
+lic/lm/lmbx12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/lm/lmex10.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/t
+ype1/public/lm/lmmi12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/type1/public/lm/lmr17.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/lm/lmri12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 
+2.9/fonts/type1/public/lm/lmss17.pfb><C:/Users/karth/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/karth/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
+Output written on main.pdf (1 page, 494307 bytes).
 PDF statistics:
- 52 PDF objects out of 1000 (max. 8388607)
+ 83 PDF objects out of 1000 (max. 8388607)
  3 named destinations out of 1000 (max. 500000)
- 69 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 94 words of extra memory for PDF output out of 10000 (max. 10000000)
 

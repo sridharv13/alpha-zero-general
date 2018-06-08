@@ -42,8 +42,6 @@ arena = Arena.Arena(n21p, gp1, g, display=display)
 print(arena.playGames(20, verbose=verbose))
 
 
-n15 = NNet(g)
-n15.load_checkpoint('./pretrained_models/minichess/keras/','checkpoint_15.pth.tar')
 args1 = dotdict({'numMCTSSims': 200, 'cpuct':1.0})
 mcts1 = MCTS(g, n15, args1)
 n15p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
@@ -52,6 +50,26 @@ print(' Neural Network (v21) vs Neural Network (v15)')
 print('----------------------------------------')
 
 arena = Arena.Arena(n21p, n15p, g, display=display)
+print(arena.playGames(20, verbose=verbose))
+n15 = NNet(g)
+n15.load_checkpoint('./pretrained_models/minichess/keras/','checkpoint_15.pth.tar')
+
+# all players
+rp1 = RandomPlayer(g).play
+gp1 = GreedyPlayer(g).play
+
+print('')
+print(' Neural Network (v15) vs Random Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n15p, rp1, g, display=display)
+print(arena.playGames(20, verbose=verbose))
+
+print('')
+print(' Neural Network (v15) vs Greedy Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n15p, gp1, g, display=display)
 print(arena.playGames(20, verbose=verbose))
 
 
@@ -66,6 +84,23 @@ print('----------------------------------------')
 
 arena = Arena.Arena(n21p, n10p, g, display=display)
 print(arena.playGames(20, verbose=verbose))
+# all players
+rp1 = RandomPlayer(g).play
+gp1 = GreedyPlayer(g).play
+
+print('')
+print(' Neural Network (v10) vs Random Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n10p, rp1, g, display=display)
+print(arena.playGames(20, verbose=verbose))
+
+print('')
+print(' Neural Network (v10) vs Greedy Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n10p, gp1, g, display=display)
+print(arena.playGames(20, verbose=verbose))
 
 n6 = NNet(g)
 n6.load_checkpoint('./pretrained_models/minichess/keras/','checkpoint_6.pth.tar')
@@ -77,6 +112,23 @@ print(' Neural Network (v21) vs Neural Network (v6)')
 print('----------------------------------------')
 
 arena = Arena.Arena(n21p, n6p, g, display=display)
+print(arena.playGames(20, verbose=verbose))
+# all players
+rp1 = RandomPlayer(g).play
+gp1 = GreedyPlayer(g).play
+
+print('')
+print(' Neural Network (v6) vs Random Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n6p, rp1, g, display=display)
+print(arena.playGames(20, verbose=verbose))
+
+print('')
+print(' Neural Network (v6) vs Greedy Player')
+print('----------------------------------------')
+
+arena = Arena.Arena(n6p, gp1, g, display=display)
 print(arena.playGames(20, verbose=verbose))
 
 g = BabyChessGame(5)
