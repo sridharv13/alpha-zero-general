@@ -49,7 +49,6 @@ class Arena():
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
             if valids[action]==0:
-                print(action)
                 assert valids[action] >0
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
             if moves > max_moves:
