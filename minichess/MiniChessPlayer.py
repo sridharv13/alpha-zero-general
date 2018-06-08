@@ -17,3 +17,10 @@ class RandomPlayer():
         while valids[a]!=1:
             a = np.random.randint(self.game.getActionSize())
         return a
+
+class GreedyPlayer():
+    def __init__(self, game):
+        self.game = game
+
+    def play(self, board):
+        return self.game.getGreedyMove(board,1)

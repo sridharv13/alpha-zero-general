@@ -99,7 +99,7 @@ class Arena():
             bar.next()
 
         self.player1, self.player2 = self.player2, self.player1
-        
+        black_start = (oneWon,twoWon,draws)
         for _ in range(num):
             gameResult = self.playGame(verbose=verbose)
             if gameResult==-1:
@@ -115,7 +115,11 @@ class Arena():
             bar.suffix  = '({eps}/{maxeps}) Eps Time: {et:.3f}s | Total: {total:} | ETA: {eta:}'.format(eps=eps+1, maxeps=num, et=eps_time.avg,
                                                                                                        total=bar.elapsed_td, eta=bar.eta_td)
             bar.next()
-            
+
+        white_start = (oneWon - black_start[0],twoWon - black_start[1],draws - black_start[2])
+        print('')
+        print('Neural network as Black - Wins of (NN Won,Opponent Won,Draw) :' + str(black_start))
+        print('Neural network as White - Wins of (NN,Random,Draw) :' + str(white_start))
         bar.finish()
 
         return oneWon, twoWon, draws

@@ -109,6 +109,19 @@ class Board:
             moves = attack_moves
         return moves
 
+    def greedy_move(self,player):
+        moves = []
+        attack_move = None
+        min_val = 0
+        flat_pieces = [item for sublist in self.pieces for item in sublist]
+        for (p, start, end) in self._get_legal_moves(player):
+            moves.append((p,start,end))
+            if flat_pieces[end] < min_val:
+                attack_move = (p,start,end)
+                min_val = flat_pieces[end]
+        if attack_move == None: attack_move = moves[0] # Some random move if no attack move exists
+        return attack_move
+
     def _get_legal_moves(self,player):
         # For each of our pieces, iterate through each possible 'ray' of moves,
         # as defined in the 'directions' map. The rays are broken e.g. by
