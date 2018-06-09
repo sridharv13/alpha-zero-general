@@ -37,24 +37,27 @@ class Arena():
         curPlayer = 1
         board = self.game.getInitBoard()
         it = 0
+        moves = 0
+        max_moves = 200
         while self.game.getGameEnded(board, curPlayer)==0:
             it+=1
             if verbose:
                 assert(self.display)
-                print("Turn ", str(it), "Player ", str(curPlayer))
-                self.display(board)
+                self.display(self.game,board,curPlayer)
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
             if valids[action]==0:
-                print(action)
                 assert valids[action] >0
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
+            if moves > max_moves:
+                break
+            moves += 1
         if verbose:
             assert(self.display)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
-            self.display(board)
+            self.display(self.game,board,curPlayer)
         return self.game.getGameEnded(board, 1)
 
     def playGames(self, num, verbose=False):
@@ -94,7 +97,7 @@ class Arena():
             bar.next()
 
         self.player1, self.player2 = self.player2, self.player1
-        
+        black_start = (oneWon,twoWon,draws)
         for _ in range(num):
             gameResult = self.playGame(verbose=verbose)
             if gameResult==-1:
@@ -110,7 +113,11 @@ class Arena():
             bar.suffix  = '({eps}/{maxeps}) Eps Time: {et:.3f}s | Total: {total:} | ETA: {eta:}'.format(eps=eps+1, maxeps=num, et=eps_time.avg,
                                                                                                        total=bar.elapsed_td, eta=bar.eta_td)
             bar.next()
-            
+
+        white_start = (oneWon - black_start[0],twoWon - black_start[1],draws - black_start[2])
+        print('')
+        print('Neural network as Black - Wins of (NN Won,Opponent Won,Draw) :' + str(black_start))
+        print('Neural network as White - Wins of (NN Won,Opponent Won,Draw) :' + str(white_start))
         bar.finish()
 
         return oneWon, twoWon, draws

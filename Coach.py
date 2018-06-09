@@ -6,7 +6,7 @@ from pytorch_classification.utils import Bar, AverageMeter
 import time, os, sys
 from pickle import Pickler, Unpickler
 from random import shuffle
-
+import boto3
 
 class Coach():
     """
@@ -43,13 +43,15 @@ class Coach():
         self.curPlayer = 1
         episodeStep = 0
 
+        moves = 0
+        max_moves = 200
         while True:
             episodeStep += 1
             canonicalBoard = self.game.getCanonicalForm(board,self.curPlayer)
             temp = int(episodeStep < self.args.tempThreshold)
-
             pi = self.mcts.getActionProb(canonicalBoard, temp=temp)
             sym = self.game.getSymmetries(canonicalBoard, pi)
+            self.game.display(canonicalBoard,self.curPlayer)
             for b,p in sym:
                 trainExamples.append([b, self.curPlayer, p, None])
 
@@ -57,9 +59,102 @@ class Coach():
             board, self.curPlayer = self.game.getNextState(board, self.curPlayer, action)
 
             r = self.game.getGameEnded(board, self.curPlayer)
-
+            moves += 1
+            if moves > max_moves:
+                r = 1e-4
             if r!=0:
-                return [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
+                self.game.display(canonicalBoard, -self.curPlayer)
+                print('Player '+str(r)+' won')
+                res = [(x[0],x[2],r*((-1)**(x[1]!=self.curPlayer))) for x in trainExamples]
+                return res
+
+    def self_play(self):
+        """
+        Performs numIters iterations with numEps episodes of self-play in each
+        iteration. After every iteration, it retrains neural network with
+        examples in trainExamples (which has a maximium length of maxlenofQueue).
+        It then pits the new neural network against the old one and accepts it
+        only if it wins >= updateThreshold fraction of games.
+        """
+
+        # TODO: parallelize this iterations
+        for i in range(1, self.args.numIters + 1):
+            # bookkeeping
+            print('------ITER ' + str(i) + '------')
+            # examples of the iteration
+            if not self.skipFirstSelfPlay or i > 1:
+                iterationTrainExamples = deque([], maxlen=self.args.maxlenOfQueue)
+
+                eps_time = AverageMeter()
+                bar = Bar('Self Play', max=self.args.numEps)
+                end = time.time()
+
+                for eps in range(self.args.numEps):
+                    self.mcts = MCTS(self.game, self.nnet, self.args)  # reset search tree
+                    iterationTrainExamples += self.executeEpisode()
+
+                    # bookkeeping + plot progress
+                    eps_time.update(time.time() - end)
+                    end = time.time()
+                    bar.suffix = '({eps}/{maxeps}) Eps Time: {et:.3f}s | Total: {total:} | ETA: {eta:}'.format(
+                        eps=eps + 1, maxeps=self.args.numEps, et=eps_time.avg,
+                        total=bar.elapsed_td, eta=bar.eta_td)
+                    bar.next()
+                bar.finish()
+
+                # save the iteration examples to the history
+                self.trainExamplesHistory.append(iterationTrainExamples)
+            if len(self.trainExamplesHistory) > self.args.numItersForTrainExamplesHistory:
+                print("len(trainExamplesHistory) =", len(self.trainExamplesHistory),
+                      " => remove the oldest trainExamples")
+                self.trainExamplesHistory.pop(0)
+            # backup history to a file
+            # NB! the examples were collected using the model from the previous iteration, so (i-1)
+            self.saveTrainExamples(i - 1)
+        self.aws_s3_sync()
+
+
+    def train(self):
+        # shuffle examlpes before training
+        trainExamples = []
+        for e in self.trainExamplesHistory:
+            trainExamples.extend(e)
+        shuffle(trainExamples)
+
+        # training new network, keeping a copy of the old one
+        self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')
+        self.pnet.load_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')
+        pmcts = MCTS(self.game, self.pnet, self.args)
+
+        self.nnet.train(trainExamples)
+        self.aws_s3_sync()
+
+    def pitter(self):
+        # training new network, keeping a copy of the old one
+        self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best1.pth.tar')
+        self.pnet.load_checkpoint(folder=self.args.checkpoint, filename='best2.pth.tar')
+        pmcts = MCTS(self.game, self.pnet, self.args)
+
+        nmcts = MCTS(self.game, self.nnet, self.args)
+
+        print('PITTING AGAINST PREVIOUS VERSION')
+        arena = Arena(lambda x: np.argmax(pmcts.getActionProb(x, temp=0)),
+                      lambda x: np.argmax(nmcts.getActionProb(x, temp=0)), self.game)
+        pwins, nwins, draws = arena.playGames(self.args.arenaCompare)
+
+        print('NEW/PREV WINS : %d / %d ; DRAWS : %d' % (nwins, pwins, draws))
+        if pwins + nwins > 0 and float(nwins) / (pwins + nwins) < self.args.updateThreshold:
+            print('REJECTING NEW MODEL')
+            self.nnet.load_checkpoint(folder=self.args.checkpoint, filename='temp.pth.tar')
+        else:
+            print('ACCEPTING NEW MODEL')
+            self.nnet.save_checkpoint(folder=self.args.checkpoint, filename=self.getCheckpointFile(i))
+            self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')
+        self.aws_s3_sync()
+
+
+    def aws_s3_sync(self):
+        os.system('aws sync temp s3://minichess/data')
 
     def learn(self):
         """
@@ -95,7 +190,6 @@ class Coach():
 
                 # save the iteration examples to the history 
                 self.trainExamplesHistory.append(iterationTrainExamples)
-                
             if len(self.trainExamplesHistory) > self.args.numItersForTrainExamplesHistory:
                 print("len(trainExamplesHistory) =", len(self.trainExamplesHistory), " => remove the oldest trainExamples")
                 self.trainExamplesHistory.pop(0)
@@ -131,6 +225,12 @@ class Coach():
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename=self.getCheckpointFile(i))
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')                
 
+    def write_to_s3(self,filename,data):
+        s3 = boto3.resource('s3')
+        object = s3.Object('minichess', filename)
+        print(object)
+        object.put(Body=data)
+
     def getCheckpointFile(self, iteration):
         return 'checkpoint_' + str(iteration) + '.pth.tar'
 
@@ -138,10 +238,13 @@ class Coach():
         folder = self.args.checkpoint
         if not os.path.exists(folder):
             os.makedirs(folder)
-        filename = os.path.join(folder, self.getCheckpointFile(iteration)+".examples")
+        s3_key_name = self.getCheckpointFile(iteration)+"."+self.args.generator_id+".examples"
+        filename = os.path.join(folder, self.getCheckpointFile(iteration)+"."+self.args.generator_id+".examples")
         with open(filename, "wb+") as f:
             Pickler(f).dump(self.trainExamplesHistory)
         f.closed
+        print(self.write_to_s3(s3_key_name,open(filename,"rb").read()))
+
 
     def loadTrainExamples(self):
         modelFile = os.path.join(self.args.load_folder_file[0], self.args.load_folder_file[1])
