@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.2)  8 JUN 2018 17:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.2)  9 JUN 2018 15:07
 entering extended mode
 **./main.tex
 (main.tex
@@ -1277,73 +1277,124 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <12.50194> on input line 77.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8.93> on input line 77.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 349.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 377.
 
 ("C:\Users\karth\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Calculating math sizes for size <37.03> on input line 349.
+LaTeX Font Info:    Calculating math sizes for size <37.03> on input line 377.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <37.03> on input line 349.
+(Font)              <37.03> on input line 377.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <25.92088> on input line 349.
+(Font)              <25.92088> on input line 377.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <18.515> on input line 349.
+(Font)              <18.515> on input line 377.
+
+Underfull \hbox (badness 1721) in paragraph at lines 377--377
+\T1/lmr/m/n/37.03 Keywords: \T1/lmr/m/it/37.03 CNN, Re-in-force-ment Learn-ing,
+
+ []
+
 <minichess.png, id=14, 500.24391pt x 153.57375pt>
 File: minichess.png Graphic file (type png)
 <use minichess.png>
-Package pdftex.def Info: minichess.png  used on input line 349.
+Package pdftex.def Info: minichess.png  used on input line 377.
 (pdftex.def)             Requested size: 763.17543pt x 234.31795pt.
-<distributed_arch.png, id=16, 451.08525pt x 283.96088pt>
+<loss.png, id=16, 397.8614pt x 153.57375pt>
+File: loss.png Graphic file (type png)
+<use loss.png>
+Package pdftex.def Info: loss.png  used on input line 377.
+(pdftex.def)             Requested size: 763.17543pt x 294.6192pt.
+<distributed_arch.png, id=17, 451.08525pt x 283.96088pt>
 File: distributed_arch.png Graphic file (type png)
 <use distributed_arch.png>
-Package pdftex.def Info: distributed_arch.png  used on input line 349.
+Package pdftex.def Info: distributed_arch.png  used on input line 377.
 (pdftex.def)             Requested size: 763.17543pt x 480.44366pt.
-<performance_gain.png, id=17, 500.62032pt x 305.64188pt>
-File: performance_gain.png Graphic file (type png)
-<use performance_gain.png>
-Package pdftex.def Info: performance_gain.png  used on input line 349.
-(pdftex.def)             Requested size: 763.17543pt x 465.98889pt.
-<overall_loss.png, id=18, 296.98453pt x 207.02344pt>
-File: overall_loss.png Graphic file (type png)
-<use overall_loss.png>
-Package pdftex.def Info: overall_loss.png  used on input line 349.
-(pdftex.def)             Requested size: 228.95496pt x 159.60753pt.
-<pi_loss.png, id=19, 298.11375pt x 208.52907pt>
-File: pi_loss.png Graphic file (type png)
-<use pi_loss.png>
-Package pdftex.def Info: pi_loss.png  used on input line 349.
-(pdftex.def)             Requested size: 228.95496pt x 160.15422pt.
-<value_loss.png, id=20, 300.7486pt x 208.52907pt>
-File: value_loss.png Graphic file (type png)
-<use value_loss.png>
-Package pdftex.def Info: value_loss.png  used on input line 349.
-(pdftex.def)             Requested size: 228.95496pt x 158.75418pt.
-<cnn.png, id=21, 625.21078pt x 152.44453pt>
+<cnn.png, id=18, 625.21078pt x 152.44453pt>
 File: cnn.png Graphic file (type png)
 <use cnn.png>
-Package pdftex.def Info: cnn.png  used on input line 349.
+Package pdftex.def Info: cnn.png  used on input line 377.
 (pdftex.def)             Requested size: 610.54266pt x 148.87123pt.
-<baseline.png, id=22, 406.89516pt x 198.7425pt>
+<pre_hyper.png, id=19, 216.81pt x 164.48953pt>
+File: pre_hyper.png Graphic file (type png)
+<use pre_hyper.png>
+Package pdftex.def Info: pre_hyper.png  used on input line 377.
+(pdftex.def)             Requested size: 305.2655pt x 231.62906pt.
+<hyper.png, id=20, 201.37735pt x 145.66922pt>
+File: hyper.png Graphic file (type png)
+<use hyper.png>
+Package pdftex.def Info: hyper.png  used on input line 377.
+(pdftex.def)             Requested size: 305.2655pt x 220.81935pt.
+<overall_loss.png, id=21, 296.98453pt x 207.02344pt>
+File: overall_loss.png Graphic file (type png)
+<use overall_loss.png>
+Package pdftex.def Info: overall_loss.png  used on input line 377.
+(pdftex.def)             Requested size: 228.95496pt x 159.60753pt.
+<pi_loss.png, id=22, 298.11375pt x 208.52907pt>
+File: pi_loss.png Graphic file (type png)
+<use pi_loss.png>
+Package pdftex.def Info: pi_loss.png  used on input line 377.
+(pdftex.def)             Requested size: 228.95496pt x 160.15422pt.
+<value_loss.png, id=23, 300.7486pt x 208.52907pt>
+File: value_loss.png Graphic file (type png)
+<use value_loss.png>
+Package pdftex.def Info: value_loss.png  used on input line 377.
+(pdftex.def)             Requested size: 228.95496pt x 158.75418pt.
+<baseline.png, id=24, 406.89516pt x 198.7425pt>
 File: baseline.png Graphic file (type png)
 <use baseline.png>
-Package pdftex.def Info: baseline.png  used on input line 349.
+Package pdftex.def Info: baseline.png  used on input line 377.
 (pdftex.def)             Requested size: 610.54266pt x 298.2252pt.
-<diff_layouts.png, id=23, 348.17578pt x 162.2311pt>
+<diff_layouts.png, id=25, 348.17578pt x 162.2311pt>
 File: diff_layouts.png Graphic file (type png)
 <use diff_layouts.png>
-Package pdftex.def Info: diff_layouts.png  used on input line 349.
-(pdftex.def)             Requested size: 610.54266pt x 284.52007pt.
+Package pdftex.def Info: diff_layouts.png  used on input line 377.
+(pdftex.def)             Requested size: 534.22046pt x 248.9529pt.
+<performance_gain.png, id=26, 500.62032pt x 305.64188pt>
+File: performance_gain.png Graphic file (type png)
+<use performance_gain.png>
+Package pdftex.def Info: performance_gain.png  used on input line 377.
+(pdftex.def)             Requested size: 534.22046pt x 326.18942pt.
+<neural_net_overall.png, id=27, 360.22078pt x 297.36093pt>
+File: neural_net_overall.png Graphic file (type png)
+<use neural_net_overall.png>
+Package pdftex.def Info: neural_net_overall.png  used on input line 377.
+(pdftex.def)             Requested size: 228.95496pt x 188.99904pt.
+<neural_net_white.png, id=28, 345.16454pt x 296.98453pt>
+File: neural_net_white.png Graphic file (type png)
+<use neural_net_white.png>
+Package pdftex.def Info: neural_net_white.png  used on input line 377.
+(pdftex.def)             Requested size: 228.95496pt x 196.99828pt.
+<neural_net_black.png, id=29, 348.92859pt x 292.46765pt>
+File: neural_net_black.png Graphic file (type png)
+<use neural_net_black.png>
+Package pdftex.def Info: neural_net_black.png  used on input line 377.
+(pdftex.def)             Requested size: 228.95496pt x 191.9091pt.
+<attack_1.png, id=30, 415.5525pt x 127.60172pt>
+File: attack_1.png Graphic file (type png)
+<use attack_1.png>
+Package pdftex.def Info: attack_1.png  used on input line 377.
+(pdftex.def)             Requested size: 763.17543pt x 234.37332pt.
+<attack_2.png, id=31, 438.8897pt x 141.52875pt>
+File: attack_2.png Graphic file (type png)
+<use attack_2.png>
+Package pdftex.def Info: attack_2.png  used on input line 377.
+(pdftex.def)             Requested size: 763.17543pt x 246.10686pt.
 
-Overfull \hbox (4.99402pt too wide) detected at line 349
+Overfull \hbox (4.99402pt too wide) detected at line 377
 [][][] [][][][][][][][][] [][][][][][][][][] [][][][][][][][][] [][][][][][][][
 ][] [][][][][][][][][] [][][][][][][] 
  []
 
 
-Overfull \vbox (43.24635pt too high) detected at line 349
+Overfull \vbox (40.73364pt too high) detected at line 377
  []
 
+<stanford-university-logo.png, id=33, 1003.75pt x 1003.75pt>
+File: stanford-university-logo.png Graphic file (type png)
+<use stanford-university-logo.png>
+Package pdftex.def Info: stanford-university-logo.png  used on input line 377.
+(pdftex.def)             Requested size: 284.52481pt x 284.52756pt.
 
 Overfull \hbox (88.20334pt too wide) has occurred while \output is active
 []
@@ -1351,9 +1402,11 @@ Overfull \hbox (88.20334pt too wide) has occurred while \output is active
 
 [1{C:/Users/karth/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
- <./minichess.png> <./distributed_arch.png> <./performance_gain.png> <./overall
-_loss.png> <./pi_loss.png> <./value_loss.png> <./cnn.png> <./baseline.png> <./d
-iff_layouts.png>]
+ <./stanford-university-logo.png> <./minichess.png> <./loss.png> <./distributed
+_arch.png> <./cnn.png> <./pre_hyper.png> <./hyper.png> <./overall_loss.png> <./
+pi_loss.png> <./value_loss.png> <./baseline.png> <./diff_layouts.png> <./perfor
+mance_gain.png> <./neural_net_overall.png> <./neural_net_white.png> <./neural_n
+et_black.png> <./attack_1.png> <./attack_2.png>]
 \tf@nav=\write6
 \openout6 = `main.nav'.
 
@@ -1363,27 +1416,27 @@ iff_layouts.png>]
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 379.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 379.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 379.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 379.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22422 strings out of 493305
- 443563 string characters out of 3129803
- 574283 words of memory out of 3000000
- 25423 multiletter control sequences out of 15000+200000
+ 22495 strings out of 493305
+ 445237 string characters out of 3129803
+ 580851 words of memory out of 3000000
+ 25487 multiletter control sequences out of 15000+200000
  65201 words of font info for 60 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,16n,71p,773b,1442s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
-c}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathe
+ 60i,18n,71p,773b,1618s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathe
 x.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-r
 m.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
 athit.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
+lm-ec.enc}{C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
 lm-mathsy.enc}<C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
 lic/lm/lmbx12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
 /public/lm/lmex10.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX 2.9/fonts/t
@@ -1393,9 +1446,9 @@ fonts/type1/public/lm/lmri12.pfb><C:/Users/karth/AppData/Local/Programs/MiKTeX
 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Users/karth/AppData/Local/Programs/MiK
 TeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/karth/AppData/Local/Progra
 ms/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
-Output written on main.pdf (1 page, 494307 bytes).
+Output written on main.pdf (1 page, 1076925 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  3 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 139 words of extra memory for PDF output out of 10000 (max. 10000000)
 

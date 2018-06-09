@@ -60,13 +60,13 @@
 
 %multi-row
 \usepackage{multirow}
- 
+\usepackage{tikz}
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
-\title{CS230 - Learning Minichess Without Human Knowledge} % Poster title
+\title{CS230 - Learning to Play Minichess Without Human Knowledge} % Poster title
 
 \author{Karthik selvakumar Bhuvaneswaran} % Author(s)
 
@@ -75,6 +75,12 @@
 %----------------------------------------------------------------------------------------
 
 \begin{document}
+
+\addtobeamertemplate{headline}{} 
+{\begin{tikzpicture}[remember picture, overlay]
+     \node [anchor=north west, inner sep=3cm]  at (current page.north west)
+     {\includegraphics[height=10cm]{stanford-university-logo.png}};
+  \end{tikzpicture}}
 
 \addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
 \addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
@@ -98,24 +104,26 @@
 
 \begin{alertblock}{Abstract}
 
-Using WebRTC we are trying to develop a product called 'Ping' used for audio, mult-video, file and screen sharing.
 \begin{itemize}
-\item Ping uses WebRTC for the source of data exchange and XMPP Server for signalling and transporting.
-\item Ping works on Browser to Browser connections instead of naive client server approach.
-\item Ping guarentees high scalability and upto 60\% more efficiency than existing systems.
+\item Implementing a self play based algorithm using neural nets has become popular after the huge success of Alpha Zero by Deep Mind.
+\item Replicating the results for games with larger search space like chess requires scaling. 
+\item We develop a scaled up version of alpha-zero-general for the game of Minichess and evaluate our learning algorithm with various baselines.
 \end{itemize}
+Keywords: \emph{CNN, Reinforcement Learning, Distributed Computing, Monte Carlo search}
 
 \end{alertblock}
+
 
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Logic and MCTS}
+\begin{block}{Introduction}
 
 \begin{itemize}
-\item WebRTC is an upcoming standard that aims to improve real time communication among web browsers in peer to peer fashion.
-\item Ping uses WebRTC which allows browsers to natively support interactive peer to peer communication and realtime collaboration.
+\item Self play and improve without any human knowledge.
+\item MCTS provides provides ground truth to compare and learn.
+\item 5X5 chess board with Gardner layout will be used for our training. 
 \end{itemize}
 
 \begin{figure}
@@ -123,8 +131,15 @@ Using WebRTC we are trying to develop a product called 'Ping' used for audio, mu
 \caption{Popular Minichess Board Layouts}
 \end{figure}
 
+\begin{itemize}
+\item Single Neural network used for both Policy and Value evaluation
+\item We will use the following Loss function \[ l = - \sum (v_{\theta}(s_{t}) - z_{t})^{2}+ \vec{\pi_{t}} log(\vec{p_{\theta}}(s_{t}))  \]
+\end{itemize}
 
-\[ l = \sum (v_{\theta}(s_{t}) - z_{t})^{2}+ \vec{\pi_{t}} log(\vec{p_{\theta}}(s_{t}))  \]
+\begin{figure}
+\includegraphics[width=1.0\linewidth]{loss.png}
+\caption{Parameters in network and choice of loss functions}
+\end{figure}
 
 
 \end{block}
@@ -149,20 +164,53 @@ Using WebRTC we are trying to develop a product called 'Ping' used for audio, mu
 
 \begin{block}{Distributed Architecture}
 
-We designed an efficient architecture for Ping to withstand high traffic.
+Three major components in self play and learn are:
 
 \begin{itemize}
-\item At start browsers do not know each other.
-\item WebRTC mediates the setup process through the XMPP server of Ping.
+\item \emph{Training Data Generator} - Plays games and generates data for training.
+\item \emph{Trainer} - Consumes the data from Training Data Generator, compares against MCTS and learns.
+\item \emph{Pitter} - Compares two models and publishes a winner model.
 \end{itemize}
-
 \begin{figure}
 \includegraphics[width=1.0\linewidth]{distributed_arch.png}
-\caption{Distributed Cloud Architecture for Reinforcement Learning}
+\caption{Scaling up the training using Distributed Architecture}
+\end{figure}
+
+\end{block}
+
+\begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
+
+%----------------------------------------------------------------------------------------
+%	MATHEMATICAL SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Neural Network Model}
+
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{cnn.png}
+\caption{CNN Layers with both Policy and Value output}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{pre_hyper.png}
+\includegraphics[width=0.4\linewidth]{hyper.png}
+\caption{Hyperparams used for Pre-processing and Training}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.3\linewidth]{overall_loss.png}
+\includegraphics[width=0.3\linewidth]{pi_loss.png}
+\includegraphics[width=0.3\linewidth]{value_loss.png}
+\caption{Loss values after each epoch}
 \end{figure}
 
 
 \end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.1
 
 %----------------------------------------------------------------------------------------
 
@@ -173,13 +221,49 @@ We designed an efficient architecture for Ping to withstand high traffic.
 %----------------------------------------------------------------------------------------
 %	METHODS
 %----------------------------------------------------------------------------------------
+\begin{column}{\onecolwid} % The second column within column 2 (column 2.2)
 
-\begin{block}{Performance Gain Distributed vs Single Instance}
+%----------------------------------------------------------------------------------------
+%	RESULTS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Baseline Comparison}
+
+
 \begin{figure}
-\includegraphics[width=1.0\linewidth]{performance_gain.png}
-\caption{Distributed Cloud Architecture for Reinforcement Learning}
+\includegraphics[width=0.8\linewidth]{baseline.png}
+\caption{Results of pitting Best Model (V21) with other players}
 \end{figure}
 
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{diff_layouts.png}
+\caption{Trained on Gardner and transferred to other layouts}
+\end{figure}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.2
+
+\begin{block}{Performance Improvements}
+
+\begin{itemize}
+\item 2.5 times improvement in training speed with distributed setup.
+\end{itemize}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{performance_gain.png}
+\caption{Single CPU vs Distributed Architecture}
+\emph{After 21 iterations of training, when evaluated:}
+\begin{itemize}
+\item Defeats random player 100\%.
+\item Defeats greedy player 100\% when Neural Net takes first turn (White)
+\end{itemize}
+\includegraphics[width=0.3\linewidth]{neural_net_overall.png}
+\includegraphics[width=0.3\linewidth]{neural_net_white.png}
+\includegraphics[width=0.3\linewidth]{neural_net_black.png}
+\caption{Performance of Neural Net over other baselines}
+\end{figure}
 
 \end{block}
 
@@ -199,62 +283,8 @@ We designed an efficient architecture for Ping to withstand high traffic.
 
 \begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column again
 
-\begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
-
-%----------------------------------------------------------------------------------------
-%	MATHEMATICAL SECTION
-%----------------------------------------------------------------------------------------
-
-\begin{block}{Neural Network and hyperparams}
-
-\begin{itemize}
-\item RTC Peer connection is the WebRTC API that handles stable and efficient communication of streaming data between peers.
-\end{itemize}
 
 
-\begin{figure}
-\includegraphics[width=0.3\linewidth]{overall_loss.png}
-\includegraphics[width=0.3\linewidth]{pi_loss.png}
-\includegraphics[width=0.3\linewidth]{value_loss.png}
-\caption{Loss values after each epoch}
-\end{figure}
-
-
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{cnn.png}
-\caption{Baseline Random vs Greedy vs Neural Net}
-\end{figure}
-
-\end{block}
-
-%----------------------------------------------------------------------------------------
-
-\end{column} % End of column 2.1
-
-\begin{column}{\onecolwid} % The second column within column 2 (column 2.2)
-
-%----------------------------------------------------------------------------------------
-%	RESULTS
-%----------------------------------------------------------------------------------------
-
-\begin{block}{Baseline Random vs Greedy vs Neural Net}
-
-
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{baseline.png}
-\caption{Baseline Random vs Greedy vs Neural Net}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{diff_layouts.png}
-\caption{Best Model on directly used on different layouts}
-\end{figure}
-
-\end{block}
-
-%----------------------------------------------------------------------------------------
-
-\end{column} % End of column 2.2
 
 \end{columns} % End of the split of column 2
 
@@ -269,21 +299,17 @@ We designed an efficient architecture for Ping to withstand high traffic.
 %	CONCLUSION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Iteration to Reach the performance}
+\begin{block}{Observations}
 
-\begin{itemize}
-\item Though there are existing systems like Skype and Hangouts, Ping guarentees around 60\% more efficiency.
-\item Ping also guarentees high scalability. Around 3000 users per second.
-\item As WebRTC is leveraging communication, Ping uses WebRTC to improved end user experience.
-\end{itemize}
+\begin{figure}
+\includegraphics[width=1.0\linewidth]{attack_1.png}
+\end{figure}
 
-\end{block}
 
-\begin{block}{Interesting Moves and Neural Net values}
+\begin{figure}
+\includegraphics[width=1.0\linewidth]{attack_2.png}
+\end{figure}
 
-\begin{itemize}
-\item Though there are existing systems like Skype and Hangouts, Ping guarentees around 60\% more efficiency.
-\end{itemize}
 
 \end{block}
 
@@ -291,8 +317,9 @@ We designed an efficient architecture for Ping to withstand high traffic.
 \begin{block}{Conclusion}
 
 \begin{itemize}
-\item Though there are existing systems like Skype and Hangouts, Ping guarentees around 60\% more efficiency.
-\item Ping also guarentees high scalability. Around 3000 users per second.
+\item Trained model beats the random, greedy baselines and performs decently on other layouts.
+\item Monte Carlo Tree Search and CNN can approximate search space as large as $9 * 10^{18}$ as we seen in Minichess.
+\item Parallelizing self play, training and pitter by leveraging cloud services improves the performance substantially
 \end{itemize}
 
 \end{block}
@@ -313,7 +340,7 @@ We designed an efficient architecture for Ping to withstand high traffic.
 \begin{itemize}{}
 
 \item Gardner's Minichess Variant is solved. Mehdi Mhalla et al. {\em arXiv e-print (arXiv:1307.7118) }
-\item Learning to Play Othello Without Human Knowledge Surag Nair et al {\em github.com/suragnair/alpha-zero-general}
+\item Learning to Play Othello Without Human Knowledge Surag Nair et al
 \item Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm. Silver et al. 2017a
 \end{itemize}
 
@@ -334,7 +361,8 @@ We designed an efficient architecture for Ping to withstand high traffic.
 
 \begin{itemize}
 \item Web: \href{https://github.com/karthikselva/alpha-zero-general/tree/minichess}{https://github.com/karthikselva/alpha-zero-general/tree/minichess}
-\item Email: karthik0@stanford.edu
+\item Demo Video: https://youtube.com/wahch?aw3rrfdf5
+\item Mentor: patcho@stanford.edu
 \end{itemize}
 
 \end{alertblock}
