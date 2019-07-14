@@ -7,6 +7,14 @@ import time, os, sys
 from pickle import Pickler, Unpickler
 from random import shuffle
 import boto3
+from google.colab import auth
+from googleapiclient.http import MediaFileUpload
+from googleapiclient.discovery import build
+
+auth.authenticate_user()
+drive_service = build('drive', 'v3')
+    
+
 
 class Coach():
     """
@@ -21,6 +29,24 @@ class Coach():
         self.mcts = MCTS(self.game, self.nnet, self.args)
         self.trainExamplesHistory = []    # history of examples from args.numItersForTrainExamplesHistory latest iterations
         self.skipFirstSelfPlay = False # can be overriden in loadTrainExamples()
+        
+    def save_file_to_drive(name, path): #note that path relates to the path on the colab VM NOT on drive
+        file_metadata = {
+          'name': name,
+          'mimeType': 'application/octet-stream'
+         }
+    
+        media = MediaFileUpload(path, 
+                        mimetype='application/octet-stream',
+                        resumable=True)
+    
+        created = drive_service.files().create(body=file_metadata,
+                                       media_body=media,
+                                       fields='id').execute()
+    
+        print('File ID: {}'.format(created.get('id')))
+    
+        return created
 
     def executeEpisode(self):
         """
@@ -226,7 +252,10 @@ class Coach():
                 self.nnet.save_checkpoint(folder=self.args.checkpoint, filename='best.pth.tar')                
 
     def write_to_s3(self,filename,data):
-        s3 = boto3.resource('s3')
+        s3 = boto3.resource('s3',
+            endpoint_url = 'https://s3.wasabisys.com',
+            aws_access_key_id = '478K47B5VQ1KWWO24T1F',
+            aws_secret_access_key = 'ekdB9reB7I6jUKwa0fOwdstYK4eqRvC5ekQ44bFt')
         object = s3.Object('minichess', filename)
         print(object)
         object.put(Body=data)
@@ -243,7 +272,7 @@ class Coach():
         with open(filename, "wb+") as f:
             Pickler(f).dump(self.trainExamplesHistory)
         f.closed
-        print(self.write_to_s3(s3_key_name,open(filename,"rb").read()))
+        print(self.save_file_to_drive(s3_key_name,filename))
 
 
     def loadTrainExamples(self):
